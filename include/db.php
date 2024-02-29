@@ -1,7 +1,14 @@
 <?php
 class DB{
-    static function getInstance(){
-        return new PDO("mysql:host=localhost;database=projeto_integrado")
+    private static $instance;
+    public static function getInstance(){
+        if(self::$instance != null){
+            return self::$instance;
+        }
+        self::$instance = new PDO("mysql:host=localhost;dbname=banco_biblioteca","root","");
+
+        return self::$instance;
     }
 }
+DB::getInstance();
 ?>
