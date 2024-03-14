@@ -1,0 +1,23 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+section {
+    background-image: url('https://i.pinimg.com/736x/09/b1/db/09b1dbdc5c84eb86674ca8f8e1258480.jpg');
+    background-size: cover;
+    /* para ajustar a imagem ao tamanho da tela */
+    background-repeat: no-repeat;
+    /* para evitar a repetição da imagem */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+nav{
+    background-color: rgb(68, 69, 68);
+}

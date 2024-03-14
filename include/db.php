@@ -5,7 +5,7 @@ class DB{
         if(self::$instance != null){
             return self::$instance;
         }
-        self::$instance = new PDO("mysql:host=localhost;dbname=banco_biblioteca","root","");
+        self::$instance = new PDO("mysql:host=localhost;dbname=projeto_teca","root","");
 
         return self::$instance;
     }
