@@ -3,7 +3,7 @@ class FuncionarioRepository implements Repository{
     public static function listAll(){
         $db = DB::getInstance();
 
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM funcionario";
         $query = $db->prepare($sql);
         $query->execute();
         
@@ -27,9 +27,9 @@ class FuncionarioRepository implements Repository{
     public static function get($id){
         $db = DB::getInstance();
 
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM funcionario WHERE id=:id";
         $query = $db->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':id', $id);
         $query->execute();
         if ($query->rowCount() > 0){
             $row = $query->fetch(PDO::FETCH_OBJ);
@@ -84,8 +84,8 @@ class FuncionarioRepository implements Repository{
         $query->bindValue(":telefone", $obj->getTelefone());
         $query->bindValue(":senha",$obj->getSenha());
         $query->bindValue(":email", $obj->getEmail());
-        $query->bindValue(":data_inclusao", $obj->getNome());
-        $query->bindValue(":inclusao_funcionario_id", $obj->getNome());
+        $query->bindValue(":data_inclusao", $obj->getDataInclusao());
+        $query->bindValue(":inclusao_funcionario_id", $obj->getInclusaoFuncionarioId());
         $query->execute();
         $id = $db->lastInsertId();//recupera o último Id inserido no BD.
         return $id;

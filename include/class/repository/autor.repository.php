@@ -3,7 +3,7 @@ class AutorRepository implements Repository{
     public static function listAll(){
         $db = DB::getInstance();
 
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM autor ";
         $query = $db->prepare($sql);
         $query->execute();
         
@@ -21,11 +21,11 @@ class AutorRepository implements Repository{
     }
     public static function get($id){
         $db = DB::getInstance();
-
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM autor WHERE id=:id";
         $query = $db->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':id', $id);
         $query->execute();
+
         if ($query->rowCount() > 0){
             $row = $query->fetch(PDO::FETCH_OBJ);
             $autor = new Autor;
@@ -44,8 +44,8 @@ class AutorRepository implements Repository{
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(":nome", $obj->getNome());
-        $query->bindValue(":data_inclusao", $obj->getNome());
-        $query->bindValue(":inclusao_funcionario_id", $obj->getNome());
+        $query->bindValue(":data_inclusao", $obj->getDataInclusao());
+        $query->bindValue(":inclusao_funcionario_id", $obj->getInclusaoFuncionarioId());
         $query->execute();
         $id = $db->lastInsertId();//recupera o último Id inserido no BD.
         return $id;

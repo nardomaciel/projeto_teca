@@ -10,7 +10,7 @@ if (!Auth::isAuthenticated()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVO AUTOR</title>
+  <title>NOVO FUNCIONARIO</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     #titAndButton{
@@ -25,25 +25,31 @@ if (!Auth::isAuthenticated()) {
 
   <div class="container">
     <div id="titAndButton">
-        <h2>AUTORES</h2>
-        <button type="button" class="btn btn-success">NOVO AUTOR</button>
+        <h2>FUNCIONARIOS</h2>
+        <button type="button" class="btn btn-success">NOVO FUNCIONARIO</button>
     </div>
     <div class="table-responsive">
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Id</th>
             <th>Nome</th>
+            <th>Cpf</th>
+            <th>Telefone</th>
+            <th>Email</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
             <?php 
-                foreach(AutorRepository::listAll() as $autor){
+                foreach(FuncionarioRepository::listAll() as $funcionario){
             ?>
               <tr>
-                    <td><?php echo $autor->getId(); ?></td>
-                    <td><?php echo $autor->getNome(); ?></td>
+                    <td><?php echo $funcionario->getID(); ?></td>
+                    <td><?php echo $funcionario->getNome(); ?></td>
+                    <td><?php echo $funcionario->getCpf(); ?></td>
+                    <td><?php echo $funcionario->getTelefone(); ?></td>
+                    <td><?php echo $funcionario->getEmail(); ?></td>
                     <br>
                 <div>
                     <td>

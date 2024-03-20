@@ -1,9 +1,10 @@
 <?php
+echo("pqp");
 class ClienteRepository implements Repository{
     public static function listAll(){
+        echo('reconheceu');
         $db = DB::getInstance();
-
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM cliente ";
         $query = $db->prepare($sql);
         $query->execute();
         
@@ -27,9 +28,9 @@ class ClienteRepository implements Repository{
     public static function get($id){
         $db = DB::getInstance();
 
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM cliente WHERE id=:id";
         $query = $db->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':id', $id);
         $query->execute();
         if ($query->rowCount() > 0){
             $row = $query->fetch(PDO::FETCH_OBJ);

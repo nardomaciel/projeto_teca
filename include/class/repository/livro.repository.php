@@ -3,7 +3,7 @@ class LivroRepository implements Repository{
     public static function listAll(){
         $db = DB::getInstance();
 
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM livro ";
         $query = $db->prepare($sql);
         $query->execute();
         
@@ -27,9 +27,9 @@ class LivroRepository implements Repository{
     public static function get($id){
         $db = DB::getInstance();
 
-        $sql = "SELECT * FROM table WHERE id=:id";
+        $sql = "SELECT * FROM livro WHERE id=:id";
         $query = $db->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':id', $id);
         $query->execute();
         if ($query->rowCount() > 0){
             $row = $query->fetch(PDO::FETCH_OBJ);

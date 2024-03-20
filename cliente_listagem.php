@@ -25,8 +25,8 @@ if (!Auth::isAuthenticated()) {
 
   <div class="container">
     <div id="titAndButton">
-        <h2>AUTORES</h2>
-        <button type="button" class="btn btn-success">NOVO AUTOR</button>
+        <h2>CLIENTES</h2>
+        <button type="button" class="btn btn-success">NOVO CLIENTE</button>
     </div>
     <div class="table-responsive">
       <table class="table">
@@ -34,18 +34,31 @@ if (!Auth::isAuthenticated()) {
           <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Cpf</th>
+            <th>Rg</th>
+            <br>
+            <th>Data de nascimento</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
             <?php 
-                foreach(AutorRepository::listAll() as $autor){
+                echo('Antes');
+                foreach(ClienteRepository::listAll() as $cliente){
+                    echo('depois');
             ?>
               <tr>
-                    <td><?php echo $autor->getId(); ?></td>
-                    <td><?php echo $autor->getNome(); ?></td>
+                    <td><?php echo $cliente->getId(); ?></td>
+                    <td><?php echo $cliente->getNome(); ?></td>
+                    <td><?php echo $cliente->getTelefone(); ?></td>
+                    <td><?php echo $cliente->getEmail(); ?></td>
+                    <td><?php echo $cliente->getCpf(); ?></td>
+                    <td><?php echo $cliente->getRg(); ?></td>
+                    <td><?php echo $cliente->getDataNascimento()->format('d/m/Y'); ?></td>
                     <br>
-                <div>
+                <div  id="titAndButton">
                     <td>
                     <button type="button" class="btn btn-primary">EDITAR</button>
                     <button type="button" class="btn btn-danger">DELETAR</button>
