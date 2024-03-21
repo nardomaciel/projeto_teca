@@ -17,6 +17,8 @@ if (!Auth::isAuthenticated()) {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        color: white;
+        text-decoration: none;
     }
   </style>
 </head>
@@ -26,7 +28,8 @@ if (!Auth::isAuthenticated()) {
   <div class="container">
     <div id="titAndButton">
         <h2>AUTORES</h2>
-        <button type="button" class="btn btn-success">NOVO AUTOR</button>
+        <button  type="submit" class="btn btn-success"  ><a id="titAndButton"href="autor_novo.php">NOVO AUTOR</a></button>
+       
     </div>
     <div class="table-responsive">
       <table class="table">
@@ -47,8 +50,8 @@ if (!Auth::isAuthenticated()) {
                     <br>
                 <div>
                     <td>
-                    <button type="button" class="btn btn-primary">EDITAR</button>
-                    <button type="button" class="btn btn-danger">DELETAR</button>
+                    <a href=" autor_editar.php?id=<?php echo $autor->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
+                    <a type="button" class="btn btn-danger">DELETAR</a>
                     </td>
                 </div>
                 </tr>
@@ -67,6 +70,6 @@ if (!Auth::isAuthenticated()) {
      
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
 </body>
 </html>

@@ -39,7 +39,7 @@ public function setDataInclusao($data_inclusao){
     }
     
 
-    public function getInclusaoFuncionario_id()
+    public function getInclusaoFuncionarioId()
     {
     return $this->inclusao_funcionario_id;
     }

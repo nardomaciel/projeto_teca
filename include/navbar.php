@@ -8,9 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
 </head>
-<style>
-    
-</style>
+  <style>
+    .container-fluid{
+        background-color: #0056b3;
+        color: white;
+    }
+</style>  
 <body>
 
 
@@ -64,12 +67,15 @@
                 </li>
 
             </ul>
-            <button type="button" class="btn btn-danger"><a id="sair" href="logout.php">sair</a></button>
+            <button type="button" class="btn btn-outline-danger">sair</button>
         </div>
     </div>
 
 
 </nav>
-</body>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+
+</script>
+</body>
 </html>

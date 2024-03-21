@@ -40,7 +40,7 @@ class AutorRepository implements Repository{
     }
     public static function insert($obj){
         $db = DB::getInstance() ;//cria uma instancia da classe db (conexão com o bd).]
-        $sql = "INSERT INTO autor (nome, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :data_inclusao, : inclusao_funcionario_id)";
+        $sql = "INSERT INTO autor (nome, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :data_inclusao, :inclusao_funcionario_id)";
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(":nome", $obj->getNome());
@@ -57,7 +57,7 @@ class AutorRepository implements Repository{
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(':id', $obj->getId(),);
         $query->bindValue(':nome', $obj->getNome());
-        $query->bindValue(':data_inclusao', $obj->getDataInclusao());
+        $query->bindValue(':data_alteracao', $obj->getDataAlteracao());
         $query->bindValue(':alteracao_funcionario_id', $obj->getAlteracaoFuncionarioId());
         $query->execute();
     }
