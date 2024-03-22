@@ -51,16 +51,17 @@ class ClienteRepository implements Repository{
     }
     public static function insert($obj){
         $db = DB::getInstance() ;//cria uma instancia da classe db (conexão com o bd).]
-        $sql = "INSERT INTO cliente (nome, telefone, cpf, rg, data_nascimento, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :telefone, :cpf, :rg, :data_nascimento, :data_inclusao, : inclusao_funcionario_id)";
+        $sql = "INSERT INTO cliente (nome, telefone, email, cpf, rg, data_nascimento, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :telefone, :email, :cpf, :rg, :data_nascimento, :data_inclusao, : inclusao_funcionario_id)";
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(":nome", $obj->getNome());
         $query->bindValue(":telefone", $obj->getTelefone());
+        $query->bindValue(":email", $obj->getEmail());
         $query->bindValue(":cpf", $obj->getCpf());
         $query->bindValue(":rg", $obj->getRg());
         $query->bindValue(":data_nascimento", $obj->getDataNascimento());
-        $query->bindValue(":data_inclusao", $obj->getNome());
-        $query->bindValue(":inclusao_funcionario_id", $obj->getNome());
+        $query->bindValue(":data_inclusao", $obj->getDataInclusao());
+        $query->bindValue(":inclusao_funcionario_id", $obj->getInclusaoFuncionarioId());
         $query->execute();
         $id = $db->lastInsertId();//recupera o último Id inserido no BD.
         return $id;

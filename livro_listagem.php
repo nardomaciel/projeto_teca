@@ -15,8 +15,7 @@ if (!Auth::isAuthenticated()) {
   <title>Livro listagem</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style/listagensIndx.css">
-  <link rel="stylesheet" href="style/index.css">
+  
 </head>
 <style>
     #titAndButton{
@@ -31,7 +30,7 @@ if (!Auth::isAuthenticated()) {
     <div class="container">
       <div id="titAndButton">
         <h2>LIVROS</h2>
-        <button type="button" class="btn btn-success">NOVO LIVRO</button>
+        <a href="livro_novo.php" class="btn btn-success">NOVO LIVRO</a>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -68,8 +67,6 @@ if (!Auth::isAuthenticated()) {
       </div>
     </div>
   </main>
-  <script src="js/index.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

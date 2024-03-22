@@ -8,12 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
 </head>
-  <style>
+<!-- <style>
     .container-fluid{
-        background-color: #0056b3;
+        background-color: #181f25; 
         color: white;
     }
-</style>  
+</style> -->
 <body>
 
 
@@ -67,7 +67,7 @@
                 </li>
 
             </ul>
-            <button type="button" class="btn btn-outline-danger">sair</button>
+            <a href="logout.php" class="btn btn-outline-danger">sair</a>
         </div>
     </div>
 

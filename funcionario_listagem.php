@@ -26,7 +26,7 @@ if (!Auth::isAuthenticated()) {
   <div class="container">
     <div id="titAndButton">
         <h2>FUNCIONARIOS</h2>
-        <button type="button" class="btn btn-success">NOVO FUNCIONARIO</button>
+        <a href="funcionario_novo.php" class="btn btn-success">NOVO FUNCIONARIO</a>
     </div>
     <div class="table-responsive">
       <table class="table">
@@ -36,6 +36,7 @@ if (!Auth::isAuthenticated()) {
             <th>Nome</th>
             <th>Cpf</th>
             <th>Telefone</th>
+            <th>senha</th>
             <th>Email</th>
             <th>Ações</th>
           </tr>
@@ -47,9 +48,11 @@ if (!Auth::isAuthenticated()) {
               <tr>
                     <td><?php echo $funcionario->getID(); ?></td>
                     <td><?php echo $funcionario->getNome(); ?></td>
-                    <td><?php echo $funcionario->getCpf(); ?></td>
                     <td><?php echo $funcionario->getTelefone(); ?></td>
+                    <td><?php echo $funcionario->getCpf(); ?></td> 
+                    <td><?php echo $funcionario->getSenha(); ?></td> 
                     <td><?php echo $funcionario->getEmail(); ?></td>
+                   
                     <br>
                 <div>
                     <td>
