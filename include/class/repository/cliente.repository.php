@@ -1,5 +1,4 @@
 <?php
-echo("pqp");
 class ClienteRepository implements Repository{
     public static function listAll(){
         echo('reconheceu');
@@ -27,7 +26,6 @@ class ClienteRepository implements Repository{
     }
     public static function get($id){
         $db = DB::getInstance();
-
         $sql = "SELECT * FROM cliente WHERE id=:id";
         $query = $db->prepare($sql);
         $query->bindParam(':id', $id);
@@ -50,25 +48,27 @@ class ClienteRepository implements Repository{
         return null; //retorna nulo se não encontrar o autor com esse ID no banco de dados.
     }
     public static function insert($obj){
-        $db = DB::getInstance() ;//cria uma instancia da classe db (conexão com o bd).]
-        $sql = "INSERT INTO cliente (nome, telefone, email, cpf, rg, data_nascimento, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :telefone, :email, :cpf, :rg, :data_nascimento, :data_inclusao, : inclusao_funcionario_id)";
+        $db = DB::getInstance();
+        $sql = "INSERT INTO cliente (nome, telefone, email, cpf, rg, data_nascimento, data_inclusao, inclusao_funcionario_id) VALUES (:nome, :telefone, :email, :cpf, :rg, :data_nascimento, :data_inclusao, :inclusao_funcionario_id)";
 
-        $query = $db->prepare($sql);//prepara a query para ser executada.
-        $query->bindValue(":nome", $obj->getNome());
-        $query->bindValue(":telefone", $obj->getTelefone());
-        $query->bindValue(":email", $obj->getEmail());
-        $query->bindValue(":cpf", $obj->getCpf());
-        $query->bindValue(":rg", $obj->getRg());
-        $query->bindValue(":data_nascimento", $obj->getDataNascimento());
-        $query->bindValue(":data_inclusao", $obj->getDataInclusao());
-        $query->bindValue(":inclusao_funcionario_id", $obj->getInclusaoFuncionarioId());
+        $query = $db->prepare($sql);
+        $query->bindValue(":nome",$obj->getNome());
+        $query->bindValue(":telefone",$obj->getTelefone());
+        $query->bindValue(":email",$obj->getEmail());
+        $query->bindValue(":cpf",$obj->getCpf());
+        $query->bindValue(":rg",$obj->getRg());
+        $query->bindValue(":data_nascimento",$obj->getDataNascimento());
+        $query->bindValue(":data_inclusao",$obj->getDataInclusao());
+        $query->bindValue(":inclusao_funcionario_id",$obj->getInclusaoFuncionarioId());
+
         $query->execute();
-        $id = $db->lastInsertId();//recupera o último Id inserido no BD.
+
+        $id = $db->lastInsertId(); 
         return $id;
     }
     public static function update($obj){
         $db = DB::getInstance();
-        $sql = "UPDATE cliente SET nome = :nome, telefone = :telefone, cpf = : cpf, rg = :rg data_nascimento = :data_nascimento, data_alteracao = :data_alteracao, alteracao_funcionario_id = :alteracao_funcionario_id WHERE id = :id";
+        $sql = "UPDATE cliente SET nome = :nome, telefone = :telefone, cpf = : cpf, rg = :rg, data_nascimento = :data_nascimento, data_alteracao = :data_alteracao, alteracao_funcionario_id = :alteracao_funcionario_id WHERE id = :id";
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(':id', $obj->getId(),);

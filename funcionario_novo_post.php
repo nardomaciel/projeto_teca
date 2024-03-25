@@ -20,6 +20,10 @@ if($_POST["nome" == ""] || $_POST["nome" == null]){
 $funcionario = Factory::funcionario();
 
 $funcionario->setNome($_POST['nome']);
+$funcionario->setCpf($_POST['cpf']);
+$funcionario->setTelefone($_POST['telefone']);
+$funcionario->setSenha($_POST['senha']);
+$funcionario->setEmail($_POST['email']);
 $funcionario->setInclusaoFuncionarioId($user->getID());
 $funcionario->setDataInclusao(date('Y-d-m H:i:s'));
 

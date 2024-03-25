@@ -9,10 +9,12 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['nome'])){
+    echo('viado');
     header("Location: cliente_novo.php");
     exit();
 }
 if($_POST["nome" == ''] || $_POST["nome" == null]){
+    echo('vagabunda');
     header("Location: cliente_novo.php");
     exit();
 }
@@ -24,7 +26,7 @@ $cliente->setTelefone($_POST['telefone']);
 $cliente->setEmail($_POST['email']);
 $cliente->setCpf($_POST['cpf']);
 $cliente->setRg($_POST['rg']);
-// $cliente->setDataNascimento($_POST['data_nascimento']);
+$cliente->setDataNascimento($_POST['data_nascimento']);
 $cliente->setInclusaoFuncionarioId($user->getID());
 $cliente->setDataInclusao(date('Y-d-m H:i:s'));
 

@@ -37,7 +37,7 @@ if (!Auth::isAuthenticated()) {
                         <label for="nome" class="form-label">Telefone</label>
                         <input type="text" name="telefone" id="nome" class="form-control" >
                         <label for="nome" class="form-label">Email</label>
-                        <input type="text" name="email" id="nome" class="form-control" >
+                        <input type="email" name="email" id="nome" class="form-control" >
                         <label for="nome" class="form-label">Cpf</label>
                         <input type="text" name="cpf" id="nome" class="form-control" >
                         <label for="nome" class="form-label">Rg</label>

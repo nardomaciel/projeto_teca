@@ -34,9 +34,13 @@ if($_POST["nome" ] == "" || $_POST["nome" == null]){
 
 
 $cliente->setNome($_POST['nome']);
-$cliente->setAlteracaoFuncionarioId($user->getID());
-$cliente->setDataAlteracao(date('Y-d-m H:i:s'));
-
+$cliente->setTelefone($_POST['telefone']);
+$cliente->setEmail($_POST['email']);
+$cliente->setCpf($_POST['cpf']);
+$cliente->setRg($_POST['rg']);
+$cliente->setDataNascimento($_POST['data_nascimento']);
+$cliente->setInclusaoFuncionarioId($user->getID());
+$cliente->setDataInclusao(date('Y-d-m H:i:s'));
 ClienteRepository::update($cliente);
 
 

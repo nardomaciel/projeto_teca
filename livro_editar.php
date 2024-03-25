@@ -48,10 +48,13 @@ if(!$livro){
                     <div class="mb-3">
                         <label for="nome" class="form-label">Titulo</label>
                         <input type="text" name="titulo" class="form-control" name="id" value="<?php echo $livro->getTitulo()?>">
+                        
                         <label for="nome" class="form-label">Ano de lançamento</label>
                         <input type="text" name="nome" id="nome" class="form-control" name="id" value="<?php echo $livro->getAno()?>">
+
                         <label for="nome" class="form-label">Genero</label>
                         <input type="text" name="nome" id="nome" class="form-control" name="id" value="<?php echo $livro->getGenero()?>">
+
                         <label for="nome" class="form-label">Isbn</label>
                         <input type="text" name="nome" id="nome" class="form-control" name="id" value="<?php echo $livro->getIsbn()?>">
                     </div>

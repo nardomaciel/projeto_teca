@@ -15,15 +15,16 @@ if (!Auth::isAuthenticated()) {
   <title>Livro listagem</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  
+
 </head>
 <style>
-    #titAndButton{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-  </style>
+  #titAndButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+
 <body>
   <?php include("include/navbar.php") ?>
   <main>
@@ -45,23 +46,25 @@ if (!Auth::isAuthenticated()) {
             </tr>
           </thead>
           <tbody>
-              <?php
-              foreach(LivroRepository::listAll() as $livro){
-              ?>
+            <?php
+            foreach (LivroRepository::listAll() as $livro) {
+            ?>
               <tr>
                 <td><?php echo $livro->getId(); ?></td>
                 <td><?php echo $livro->getTitulo(); ?></td>
                 <td><?php echo $livro->getAno(); ?></td>
                 <td><?php echo $livro->getGenero(); ?></td>
                 <td><?php echo $livro->getIsbn(); ?></td>
-                <td>
-                <button type="button" class="btn btn-primary">EDITAR</button>
-                <button type="button" class="btn btn-danger">DELETAR</button>
-                </td>
+                <div id="titAndButton">
+                  <td>
+                    <a href="livro_editar.php?id=<?php echo $livro->getId(); ?>" type="button" class="btn btn-primary">EDITAR</a>
+                    <button type="button" class="btn btn-danger">DELETAR</button>
+                  </td>
+                </div>
               </tr>
-              <?php
-              }
-              ?>
+            <?php
+            }
+            ?>
           </tbody>
         </table>
       </div>

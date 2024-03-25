@@ -48,14 +48,19 @@ if(!$cliente){
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
                         <input type="text" name="nome" class="form-control" name="id" value="<?php echo $cliente->getNome()?>">
+
                         <label for="nome" class="form-label">Telefone</label>
                         <input type="text" name="telefone" id="nome" class="form-control" name="id" value="<?php echo $cliente->getTelefone()?>">
+
                         <label for="nome" class="form-label">Email</label>
                         <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $cliente->getEmail()?>">
+
                         <label for="nome" class="form-label">Cpf</label>
                         <input type="text" name="cpf" id="nome" class="form-control" name="id" value="<?php echo $cliente->getCpf()?>">
+                        
                         <label for="nome" class="form-label">Rg</label>
                         <input type="text" name="rg" id="nome" class="form-control" name="id" value="<?php echo $cliente->getRg()?>">
+
                         <label for="nome" class="form-label">Data de nascimento</label>
                         <input type="text" name="data de nascimento" id="nome" class="form-control" name="id" value="<?php echo $cliente->getDataNascimento()?>">
                     </div>
@@ -68,5 +73,4 @@ if(!$cliente){
         </div>
     </div>
 </body>
-
-</cliente
+</html>

@@ -36,7 +36,7 @@ if (!Auth::isAuthenticated()) {
             <th>Nome</th>
             <th>Cpf</th>
             <th>Telefone</th>
-            <th>senha</th>
+            <!-- <th>senha</th> -->
             <th>Email</th>
             <th>Ações</th>
           </tr>
@@ -50,13 +50,13 @@ if (!Auth::isAuthenticated()) {
                     <td><?php echo $funcionario->getNome(); ?></td>
                     <td><?php echo $funcionario->getTelefone(); ?></td>
                     <td><?php echo $funcionario->getCpf(); ?></td> 
-                    <td><?php echo $funcionario->getSenha(); ?></td> 
+                    <!-- <td><3?php echo $funcionario->getSenha(); ?></td>  -->
                     <td><?php echo $funcionario->getEmail(); ?></td>
                    
                     <br>
-                <div>
+                <div id="titAndButton">
                     <td>
-                    <button type="button" class="btn btn-primary">EDITAR</button>
+                    <a href="funcionario_editar.php?id=<?php echo $funcionario->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
                     <button type="button" class="btn btn-danger">DELETAR</button>
                     </td>
                 </div>

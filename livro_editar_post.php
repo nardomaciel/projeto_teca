@@ -34,6 +34,9 @@ if($_POST["nome" ] == "" || $_POST["nome" == null]){
 
 
 $livro->setTitulo($_POST['titulo']);
+$livro->setAno($_POST['ano']);
+$livro->setGenero($_POST['genero']);
+$livro->setIsbn($_POST['isbn']);
 $livro->setAlteracaoFuncionarioId($user->getID());
 $livro->setDataAlteracao(date('Y-d-m H:i:s'));
 

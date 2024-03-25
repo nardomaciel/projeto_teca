@@ -59,8 +59,8 @@ if (!Auth::isAuthenticated()) {
                     <br>
                 <div  id="titAndButton">
                     <td>
-                    <button type="button" class="btn btn-primary">EDITAR</button>
-                    <button type="button" class="btn btn-danger">DELETAR</button>
+                    <a href="cliente_editar.php?id=<?php echo $cliente->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
+                    <a type="button" class="btn btn-danger">DELETAR</a>
                     </td>
                 </div>
                 </tr>

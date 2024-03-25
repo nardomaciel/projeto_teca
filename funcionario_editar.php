@@ -12,8 +12,8 @@ if($_GET["id"] == "" || $_GET["id"] == NULL){
     header("location: funcionario_listagem.php?2");
     exit();
 }
-$autor = FuncionarioRepository::get($_GET["id"]);
-if(!$autor){
+$funcionario = FuncionarioRepository::get($_GET["id"]);
+if(!$funcionario){
     header("location: funcionario_listagem.php?3");
     exit();
 }
@@ -25,7 +25,7 @@ if(!$autor){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>NOVO FUNCIONARIO</title>
+    <title>EDITAR FUNCIONARIO</title>
 </head>
 <style>
     #titAndButton {
@@ -48,16 +48,18 @@ if(!$autor){
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
                         <input type="text" name="nome" class="form-control" name="id" value="<?php echo $funcionario->getNome()?>">
-                        <label for="nome" class="form-label">Cpf</label>
-                        <input type="text" name="cpf" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getCpf()?>">
+
                         <label for="nome" class="form-label">Telefone</label>
                         <input type="text" name="telefone" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getTelefone()?>">
-                        <label for="nome" class="form-label">Senha</label>
-                        <input type="passuord" name="senha" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getTelefone()?>">
+                        
+                        <label for="nome" class="form-label">Cpf</label>
+                        <input type="text" name="cpf" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getCpf()?>">
+
                         <label for="nome" class="form-label">Email</label>
                         <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getEmail()?>">
-                        
+
                        
+                    
                     </div>
                     <div class="mb-3">
                         <input type="hidden" name="id" value="<?php echo $funcionario->getId()?>">
@@ -68,5 +70,4 @@ if(!$autor){
         </div>
     </div>
 </body>
-
-</cliente
+</html>
