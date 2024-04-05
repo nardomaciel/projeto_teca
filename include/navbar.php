@@ -9,17 +9,14 @@
 
 </head>
 <!-- <style>
-    .container-fluid{
-        background-color: #181f25; 
-        color: white;
-    }
+   body{
+    background: black;
+   }
 </style> -->
 <body>
-
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">biblioTECA</a>
+        <a class="navbar-brand" href="index.php">biblioTECA</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,7 +43,12 @@
                         EMPRESTIMO
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">LISTAGEM</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem.php">LISTAGEM</a>
+                            <a class="dropdown-item" href="emprestimo_listagem_ativos.php">LISTAGEM > ATIVOS</a>
+                            <a class="dropdown-item" href="emprestimo_listagem_vencidos.php">LISTAGEM > VENCIDOS</a>
+                            <a class="dropdown-item" href="emprestimo_listagem_naoRenovados.php">LISTAGEM > RENOVADOS</a>
+                            <a class="dropdown-item" href="emprestimo_listagem_renovados.php">LISTAGEM > NAO RENOVADOS</a>
+                    </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

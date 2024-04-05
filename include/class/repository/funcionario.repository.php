@@ -76,7 +76,7 @@ class FuncionarioRepository implements Repository{
     }
     public static function insert($obj){
         $db = DB::getInstance() ;//cria uma instancia da classe db (conexão com o bd).]
-        $sql = "INSERT INTO funcionario (nome, cpf, telefone, senha, email, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :cpf, :telefone, :senha, :email, :data_inclusao, : inclusao_funcionario_id)";
+        $sql = "INSERT INTO funcionario (nome, cpf, telefone, senha, email, data_inclusao, inclusao_funcionario_id) VALUES(:nome, :cpf, :telefone, :senha, :email, :data_inclusao, :inclusao_funcionario_id)";
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(":nome", $obj->getNome());
@@ -99,7 +99,7 @@ class FuncionarioRepository implements Repository{
         $query->bindValue(":telefone",$obj->getTelefone());
         $query->bindValue(":senha",$obj->getSenha());
         $query->bindValue(":email",$obj->getEmail());
-        $query->bindValue(":alteracao_inclusao",$obj->getDataInclusao());
+        $query->bindValue(":data_alteracao",$obj->getDataAlteracao());
         $query->bindValue(":alteracao_funcionario_id",$obj->getInclusaoFuncionarioId());
 
     }
@@ -110,6 +110,29 @@ class FuncionarioRepository implements Repository{
         $query->bindValue(':id', $obj->getId());
         $query->execute();
     }
-
+    public static function countByInclusaoFuncionario($inclusao_funcionario_id){
+        $db = DB::getInstance();
+    
+        $sql = 'SELECT count(*) FROM funcionario WHERE inclusao_funcionario_id = :inclusao_funcionario_id'; 
+    
+        $query = $db->prepare($sql);
+        $query->bindValue(":inclusao_funcionario_id",$inclusao_funcionario_id);
+        $query->execute();
+    
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        return $row["count(*)"];
+    }
+    public static function countByAlteracaoFuncionario($alteracao_funcionario_id){
+        $db = DB::getInstance();
+    
+        $sql = 'SELECT count(*) FROM funcionario WHERE alteracao_funcionario_id = :alteracao_funcionario_id'; 
+    
+        $query = $db->prepare($sql);
+        $query->bindValue(":alteracao_funcionario_id",$alteracao_funcionario_id);
+        $query->execute();
+    
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        return $row["count(*)"];
+        }
 }
 ?>

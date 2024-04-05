@@ -57,7 +57,8 @@ if(!$funcionario){
 
                         <label for="nome" class="form-label">Email</label>
                         <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getEmail()?>">
-
+                        <a href="funcionario_editar_senha.php?id=<?php echo($funcionario->getId());?>" class="btn btn-warning">editar senha</a>
+                    
                        
                     
                     </div>

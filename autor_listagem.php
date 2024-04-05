@@ -10,16 +10,18 @@ if (!Auth::isAuthenticated()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVO AUTOR</title>
+  <title>AUTOR LISTAGEM</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
+  <style> 
     #titAndButton{
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: white;
+        color: black;
         text-decoration: none;
+
     }
+   
   </style>
 </head>
 <body>
@@ -27,7 +29,7 @@ if (!Auth::isAuthenticated()) {
 
   <div class="container">
     <div id="titAndButton">
-        <h2>AUTORES</h2>
+        <h2>AUTORES < LISTAGEM</h2>
         <button  type="submit" class="btn btn-success"  ><a id="titAndButton"href="autor_novo.php">NOVO AUTOR</a></button>
        
     </div>
@@ -51,7 +53,9 @@ if (!Auth::isAuthenticated()) {
                 <div>
                     <td>
                     <a href=" autor_editar.php?id=<?php echo $autor->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
-                    <a type="button" class="btn btn-danger">DELETAR</a>
+                    <?php if(LivroRepository::countByAutor($autor->getId())== 0){?>
+                    <a href="autor_excluir.php?id=<?php echo $autor->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
+                    <?php } ?>
                     </td>
                 </div>
                 </tr>

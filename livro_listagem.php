@@ -12,7 +12,7 @@ if (!Auth::isAuthenticated()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Livro listagem</title>
+  <title>LIVRO LISTAGEM</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
@@ -30,7 +30,7 @@ if (!Auth::isAuthenticated()) {
   <main>
     <div class="container">
       <div id="titAndButton">
-        <h2>LIVROS</h2>
+        <h2>LIVRO < LISTAGEM </h2>
         <a href="livro_novo.php" class="btn btn-success">NOVO LIVRO</a>
       </div>
       <div class="table-responsive">
@@ -41,6 +41,7 @@ if (!Auth::isAuthenticated()) {
               <th>Titulo</th>
               <th>Ano</th>
               <th>Genero</th>
+              <th>id autor </th>
               <th>ISBN</th>
               <th>Ações</th>
             </tr>
@@ -54,11 +55,14 @@ if (!Auth::isAuthenticated()) {
                 <td><?php echo $livro->getTitulo(); ?></td>
                 <td><?php echo $livro->getAno(); ?></td>
                 <td><?php echo $livro->getGenero(); ?></td>
+                <td><?php echo $livro->getAutorId(); ?></td>
                 <td><?php echo $livro->getIsbn(); ?></td>
                 <div id="titAndButton">
                   <td>
                     <a href="livro_editar.php?id=<?php echo $livro->getId(); ?>" type="button" class="btn btn-primary">EDITAR</a>
-                    <button type="button" class="btn btn-danger">DELETAR</button>
+                    <?php if(EmprestimoRepository::countByLivros($livro->getId())== 0){?>
+                    <a href="livro_excluir.php?id=<?php echo $livro->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
+                    <?php } ?>
                   </td>
                 </div>
               </tr>

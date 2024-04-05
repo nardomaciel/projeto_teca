@@ -107,5 +107,17 @@ class Emprestimo{
     public function setDevolucaoFuncionarioId($devolucao_funcionario_id){
         $this->devolucao_funcionario_id = $devolucao_funcionario_id;
     }
+
+    public function dtDataVencimento($format = 'd-m-Y'){
+        $datetime = DateTime::createFromFormat('Y-m-d', $this->data_vencimento);
+        return $datetime->format($format);
+    }
+    public function dtDataDevolucao($format = 'Y-m-d'){
+        $datetime = DateTime::createFromFormat('Y-m-d', $this->data_devolucao);
+        if($datetime){
+            return  $datetime->format($format);
+        }
+        return null;
+    }
 }
 ?>

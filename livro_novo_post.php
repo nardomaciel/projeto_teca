@@ -12,7 +12,7 @@ if(!isset($_POST['titulo'])){
     header("Location: livro_novo.php?1");
     exit();
 }
-if($_POST["nome" == ''] || $_POST["nome" == null]){
+if($_POST["nome"] == '' || $_POST["nome"] == null){
     header("Location: livro_novo.php?2");
     exit();
 }
@@ -25,7 +25,7 @@ $livro->setGenero($_POST['genero']);
 $livro->setIsbn($_POST['isbn']);
 $livro->setAutorId($_POST['autor']);
 $livro->setinclusaoFuncionarioId($user->getID());
-$livro->setDataInclusao(date('Y-d-m H:i:s'));
+$livro->setDataInclusao(date('Y-d-m h:i:s'));
 
 $livro_retorno = LivroRepository::insert($livro);
 

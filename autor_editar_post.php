@@ -35,7 +35,7 @@ if($_POST["nome" ] == "" || $_POST["nome" == null]){
 
 $autor->setNome($_POST['nome']);
 $autor->setAlteracaoFuncionarioId($user->getID());
-$autor->setDataAlteracao(date('Y-d-m H:i:s'));
+$autor->setDataAlteracao(date('Y-d-m h:i:s'));
 
 AutorRepository::update($autor);
 

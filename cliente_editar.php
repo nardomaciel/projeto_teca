@@ -25,7 +25,7 @@ if(!$cliente){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>NOVO CLIENTE</title>
+    <title>EDITAR CLIENTE</title>
 </head>
 <style>
     #titAndButton {
@@ -39,7 +39,7 @@ if(!$cliente){
     <?php include("include/navbar.php"); ?>
     <div class="container">
 
-        <h1>EDITAR CLIENTE</h1>
+        <h3>EDITAR < CLIENTE</h3>
         <a type="button" class="btn btn-warning" href="cliente_listagem.php">VOLTAR</a>
         <a type="button" class="btn btn-warning" href="cliente_novo.php">NOVO</a>
         <div class="row mt-4">
@@ -62,7 +62,7 @@ if(!$cliente){
                         <input type="text" name="rg" id="nome" class="form-control" name="id" value="<?php echo $cliente->getRg()?>">
 
                         <label for="nome" class="form-label">Data de nascimento</label>
-                        <input type="text" name="data de nascimento" id="nome" class="form-control" name="id" value="<?php echo $cliente->getDataNascimento()?>">
+                        <input type="text" name="data de nascimento" id="nome" class="form-control data_nascimento" name="id" value="<?php echo $cliente->getDataNascimento()?>">
                     </div>
                     <div class="mb-3">
                         <input type="hidden" name="id" value="<?php echo $cliente->getId()?>">
@@ -72,5 +72,12 @@ if(!$cliente){
             </div>
         </div>
     </div>
+    <script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src = "js/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+  $('.data_nascimento').mask('00/00/0000');
+        });
+    </script>
 </body>
 </html>

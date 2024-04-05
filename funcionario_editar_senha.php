@@ -5,16 +5,16 @@ if (!Auth::isAuthenticated()) {
     exit();
 }
 if(!isset($_GET['id'])){
-    header("location: autor_listagem.php?1");
+    header("location: funcionario_editar.php?1");
     exit();
 }
 if($_GET["id"] == "" || $_GET["id"] == NULL){
-    header("location: autor_listagem.php?2");
+    header("location: funcionario_editar.php?2");
     exit();
 }
-$autor = AutorRepository::get($_GET["id"]);
-if(!$autor){
-    header("location: autor_listagem.php?3");
+$funcionario = FuncionarioRepository::get($_GET["id"]);
+if(!$funcionario){
+    header("location: funcionario_editar.php?3");
     exit();
 }
 ?>
@@ -25,7 +25,7 @@ if(!$autor){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>EDITAR AUTOR</title>
+    <title>EDITAR FUNCIONARIO</title>
 </head>
 <style>
     #titAndButton {
@@ -36,21 +36,24 @@ if(!$autor){
 </style>
 
 <body>
-    <?php include("include/navbar.php"); ?>
+    <?php include("include/navbar.php");?>
     <div class="container">
 
-        <h1>EDITAR AUTOR</h1>
-        <a type="button" class="btn btn-warning" href="autor_listagem.php">VOLTAR</a>
-        <a type="button" class="btn btn-warning" href="autor_novo.php">NOVO</a>
+        <h1>EDITAR SENHA FUNCIONARIO</h1>
+        <a type="button" class="btn btn-warning" href="funcionario_listagem.php">VOLTAR</a>
         <div class="row mt-4">
             <div class="col-md-12">
-                <form action="autor_editar_post.php" method="POST">
+                <form action="funcionario_editar_post.php" method="POST">
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $autor->getNome()?>">
+                        <label for="nome" class="form-label">NOVA SENHA</label>
+                        <input type="text" name="nome" class="form-control" name="id" >
+
+                        <label for="nome" class="form-label">CONFIRMAR SENHA</label>
+                        <input type="text" name="telefone" id="nome" class="form-control" name="id" >
+                    
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" name="id" value="<?php echo $autor->getId()?>">
+                        <input type="hidden" name="id" value="<?php echo $funcionario->getId()?>">
                         <button type="submit" class="btn btn-info">ENVIAR</button>
                     </div>
                 </form>
@@ -58,5 +61,4 @@ if(!$autor){
         </div>
     </div>
 </body>
-
 </html>

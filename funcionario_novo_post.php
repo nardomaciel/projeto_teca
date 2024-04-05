@@ -12,7 +12,7 @@ if(!isset($_POST['nome'])){
     header("Location: funcionario_novo.php");
     exit();
 }
-if($_POST["nome" == ""] || $_POST["nome" == null]){
+if($_POST["nome"]== '' || $_POST["nome"] == null){
     header("Location: funcionario_novo.php");
     exit();
 }
@@ -25,7 +25,7 @@ $funcionario->setTelefone($_POST['telefone']);
 $funcionario->setSenha($_POST['senha']);
 $funcionario->setEmail($_POST['email']);
 $funcionario->setInclusaoFuncionarioId($user->getID());
-$funcionario->setDataInclusao(date('Y-d-m H:i:s'));
+$funcionario->setDataInclusao(date('Y-d-m h:i:s'));
 
 $funcionario_retorno = FuncionarioRepository::insert($funcionario);
 

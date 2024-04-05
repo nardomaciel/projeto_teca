@@ -80,13 +80,46 @@ class LivroRepository implements Repository{
         $query->bindValue(":alteracao_inclusao",$obj->getDataInclusao());
         $query->bindValue(":alteracao_funcionario_id",$obj->getInclusaoFuncionarioId());
     }
-    public static function delete($obj){
+    public static function delete($id){
         $db = DB::getInstance();
         $sql = "DELETE FROM livro WHERE id = :id";
         $query = $db->prepare($sql);
-        $query->bindValue(':id', $obj->getId());
+        $query->bindValue(':id',$id);
         $query->execute();
     }
+    public static function countByAutor( $autor_id) {
+        $db = DB::getInstance() ;
+        $sql = "SELECT count(*) FROM livro WHERE autor_id = :autor_id";
+        $query = $db->prepare($sql);
+        $query->bindValue(":autor_id", $autor_id);
+        $query->execute();
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        return $row["count(*)"];
 
+}
+public static function countByInclusaoFuncionario($inclusao_funcionario_id){
+    $db = DB::getInstance();
+
+    $sql = 'SELECT count(*) FROM livro WHERE inclusao_funcionario_id = :inclusao_funcionario_id'; 
+
+    $query = $db->prepare($sql);
+    $query->bindValue(":inclusao_funcionario_id",$inclusao_funcionario_id);
+    $query->execute();
+
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+    return $row["count(*)"];
+}
+public static function countByAlteracaoFuncionario($alteracao_funcionario_id){
+    $db = DB::getInstance();
+
+    $sql = 'SELECT count(*) FROM livro WHERE alteracao_funcionario_id = :alteracao_funcionario_id'; 
+
+    $query = $db->prepare($sql);
+    $query->bindValue(":alteracao_funcionario_id",$alteracao_funcionario_id);
+    $query->execute();
+
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+    return $row["count(*)"];
+    }
 }
 ?>

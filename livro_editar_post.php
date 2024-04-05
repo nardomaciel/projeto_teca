@@ -36,9 +36,10 @@ if($_POST["nome" ] == "" || $_POST["nome" == null]){
 $livro->setTitulo($_POST['titulo']);
 $livro->setAno($_POST['ano']);
 $livro->setGenero($_POST['genero']);
+$livro->setAutorId($_POST['autor_id']);
 $livro->setIsbn($_POST['isbn']);
 $livro->setAlteracaoFuncionarioId($user->getID());
-$livro->setDataAlteracao(date('Y-d-m H:i:s'));
+$livro->setDataAlteracao(date('Y-d-m h:i:s'));
 
 LivroRepository::update($livro);
 

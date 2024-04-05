@@ -40,7 +40,7 @@ $cliente->setCpf($_POST['cpf']);
 $cliente->setRg($_POST['rg']);
 $cliente->setDataNascimento($_POST['data_nascimento']);
 $cliente->setInclusaoFuncionarioId($user->getID());
-$cliente->setDataInclusao(date('Y-d-m H:i:s'));
+$cliente->setDataInclusao(date('Y-d-m h:i:s'));
 ClienteRepository::update($cliente);
 
 

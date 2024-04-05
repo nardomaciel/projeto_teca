@@ -5,6 +5,9 @@
        exit();
    }
 ?>
+<style>
+   
+</style>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,7 +28,7 @@
         </form>
         <p id="error-message"></p>
     </div>
-    <script src="script.js"></script>
+ 
 </body>
 
 </html>

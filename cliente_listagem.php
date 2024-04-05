@@ -10,7 +10,7 @@ if (!Auth::isAuthenticated()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVO AUTOR</title>
+  <title>CLIENTE LISTAGEM</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     #titAndButton{
@@ -25,7 +25,7 @@ if (!Auth::isAuthenticated()) {
 
   <div class="container">
     <div id="titAndButton">
-        <h2>CLIENTES</h2>
+        <h2>CLIENTES < LISTAGEM</h2>
         <a href="cliente_novo.php" class="btn btn-success">NOVO CLIENTE</a>
     </div>
     <div class="table-responsive">
@@ -44,9 +44,9 @@ if (!Auth::isAuthenticated()) {
         </thead>
         <tbody>
             <?php 
-                echo('Antes');
+                
                 foreach(ClienteRepository::listAll() as $cliente){
-                    echo('depois');
+                   
             ?>
               <tr>
                     <td><?php echo $cliente->getId(); ?></td>
@@ -60,7 +60,9 @@ if (!Auth::isAuthenticated()) {
                 <div  id="titAndButton">
                     <td>
                     <a href="cliente_editar.php?id=<?php echo $cliente->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
-                    <a type="button" class="btn btn-danger">DELETAR</a>
+                    <?php if(EmprestimoRepository::countByClientes($cliente->getId())== 0){?>
+                    <a href="cliente_excluir.php?id=<?php echo $cliente->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
+                    <?php } ?>
                     </td>
                 </div>
                 </tr>

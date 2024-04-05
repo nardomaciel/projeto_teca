@@ -10,7 +10,7 @@ if (!Auth::isAuthenticated()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVO FUNCIONARIO</title>
+  <title>FUNCIONARIO LISTAGEM</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     #titAndButton{
@@ -25,7 +25,7 @@ if (!Auth::isAuthenticated()) {
 
   <div class="container">
     <div id="titAndButton">
-        <h2>FUNCIONARIOS</h2>
+        <h2>FUNCIONARIO < LISTAGEM</h2>
         <a href="funcionario_novo.php" class="btn btn-success">NOVO FUNCIONARIO</a>
     </div>
     <div class="table-responsive">
@@ -50,32 +50,33 @@ if (!Auth::isAuthenticated()) {
                     <td><?php echo $funcionario->getNome(); ?></td>
                     <td><?php echo $funcionario->getTelefone(); ?></td>
                     <td><?php echo $funcionario->getCpf(); ?></td> 
-                    <!-- <td><3?php echo $funcionario->getSenha(); ?></td>  -->
                     <td><?php echo $funcionario->getEmail(); ?></td>
                    
                     <br>
                 <div id="titAndButton">
                     <td>
                     <a href="funcionario_editar.php?id=<?php echo $funcionario->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
-                    <button type="button" class="btn btn-danger">DELETAR</button>
+                    <?php if(funcionarioRepository::countByAlteracaoFuncionario($funcionario->getId())== 0 && funcionarioRepository::countByInclusaoFuncionario($funcionario->getId())== 0 &&AutorRepository::countByAlteracaoFuncionario($funcionario->getId())== 0 &&AutorRepository::countByInclusaoFuncionario($funcionario->getId())== 0 &&LivroRepository::countByAlteracaoFuncionario($funcionario->getId())== 0 &&LivroRepository::countByInclusaoFuncionario($funcionario->getId())== 0 &&ClienteRepository::countByAlteracaoFuncionario($funcionario->getId())== 0 &&ClienteRepository::countByInclusaoFuncionario($funcionario->getId())== 0 &&EmprestimoRepository::countByAlteracaoFuncionario($funcionario->getId())== 0 &&EmprestimoRepository::countByInclusaoFuncionario($funcionario->getId())== 0 ){?>
+                    <a href="funcionario_excluir.php?id=<?php echo $livro->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
                     </td>
                 </div>
                 </tr>
             <?php
                 }
             ?>
-        
+         <?php
+                }
+            ?>
            
         
             
-    
-          
+              
         
         </tbody>
       </table>
      
     </div>
   </div>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
 </body>
 </html>
+           

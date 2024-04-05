@@ -12,7 +12,7 @@ if(!isset($_POST['nome'])){
     header("Location: autor_novo.php");
     exit();
 }
-if($_POST["nome" == ""] || $_POST["nome" == null]){
+if($_POST["nome"] == "" || $_POST["nome" == null]){
     header("Location: autor_novo.php");
     exit();
 }
@@ -21,7 +21,7 @@ $autor = Factory::autor();
 
 $autor->setNome($_POST['nome']);
 $autor->setInclusaoFuncionarioId($user->getID());
-$autor->setDataInclusao(date('Y-d-m H:i:s'));
+$autor->setDataInclusao(date('Y-d-m h:i:s'));
 
 $autor_retorno = AutorRepository::insert($autor);
 
