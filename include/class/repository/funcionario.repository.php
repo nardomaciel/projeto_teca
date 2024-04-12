@@ -99,15 +99,15 @@ class FuncionarioRepository implements Repository{
         $query->bindValue(":telefone",$obj->getTelefone());
         $query->bindValue(":senha",$obj->getSenha());
         $query->bindValue(":email",$obj->getEmail());
-        $query->bindValue(":data_alteracao",$obj->getDataAlteracao());
+        $query->bindValue(":data_alteracao",$obj->getDataAlteracao('Y-m-d'));
         $query->bindValue(":alteracao_funcionario_id",$obj->getInclusaoFuncionarioId());
 
     }
-    public static function delete($obj){
+    public static function delete($id){
         $db = DB::getInstance();
         $sql = "DELETE FROM funcionario WHERE id = :id";
         $query = $db->prepare($sql);
-        $query->bindValue(':id', $obj->getId());
+        $query->bindValue(':id', $id);
         $query->execute();
     }
     public static function countByInclusaoFuncionario($inclusao_funcionario_id){

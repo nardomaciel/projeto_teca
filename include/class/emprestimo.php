@@ -68,9 +68,18 @@ class Emprestimo{
         $this->data_renovacao = $data_renovacao;
     }
 
-    public function getDataDevolucao(){
-        return $this->data_devolucao;
-    }
+    public function getDataDevolucao($format = "Y-m-d"){
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $datetime = DateTime::createFromFormat("Y-m-d H:i:s", $this->data_devolucao);
+
+        if($datetime){
+            return $datetime->format($format);
+        }
+
+        return null;
+        }
+
 
     public function setDataDevolucao($data_devolucao){
         $this->data_devolucao = $data_devolucao;
@@ -107,7 +116,7 @@ class Emprestimo{
     public function setDevolucaoFuncionarioId($devolucao_funcionario_id){
         $this->devolucao_funcionario_id = $devolucao_funcionario_id;
     }
-
+    
     public function dtDataVencimento($format = 'd-m-Y'){
         $datetime = DateTime::createFromFormat('Y-m-d', $this->data_vencimento);
         return $datetime->format($format);

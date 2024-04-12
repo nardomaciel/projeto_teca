@@ -12,7 +12,7 @@ if(!isset($_GET['id'])){
     header("location: autor_listagem.php?1");
     exit();
 }
-if($_GET["id"] == "" || $_GET["id"] == NULL){
+if($_GET["id"] == '' || $_GET["id"] == NULL){
     header("location: autor_listagem.php?2");
     exit();
 }
@@ -22,6 +22,9 @@ if(!$autor){
     exit();
 }
 
-
+if(LivroRepository::countByAutor($autor->getId()) > 0){
+    header("location: autor_listagem.php");
+    exit();
+}
 AutorRepository::delete($autor->getId());
 header("location:autor_listagem.php");

@@ -48,6 +48,7 @@
                             <a class="dropdown-item" href="emprestimo_listagem_vencidos.php">LISTAGEM > VENCIDOS</a>
                             <a class="dropdown-item" href="emprestimo_listagem_naoRenovados.php">LISTAGEM > RENOVADOS</a>
                             <a class="dropdown-item" href="emprestimo_listagem_renovados.php">LISTAGEM > NAO RENOVADOS</a>
+                            <a class="dropdown-item" href="emprestimo_listagem_devolvidos.php">LISTAGEM > DEVOLVIDOS</a>
                     </li>
                     </ul>
                 </li>

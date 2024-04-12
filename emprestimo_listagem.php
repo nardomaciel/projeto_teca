@@ -60,36 +60,40 @@ if (!Auth::isAuthenticated()) {
                                 ?>
                             </td>
                             <td><?php echo $emprestimo->dtDataVencimento("d/m/Y"); ?></td>
-                            <td><?php echo $emprestimo->dtDataDevolucao("d/m/Y"); ?></td>
+
+                            <td><?php  
+                            echo $emprestimo->getDataDevolucao("d/m/Y H:i:s"); ?></td>
+
                             <td>
-                                <?php 
-                                if(
-                                    $emprestimo->getDataRenovacao("Y-m-d")>= date ("Y-m-d") == null &&
-                                    $emprestimo->getDataDevolucao() == null &&
-                                    $emprestimo->getDataAlteracao() == null
-                                ){
-                                ?>
-                                <?php if(EmprestimoRepository::countByDataAlteracao($emprestimo->getId()) == null && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == null && EmprestimoRepository::countByDataRenovacao($emprestimo->getId()) == null){ ?>
-                  <a class="btn btn-warning" href="emprestimo_renovar.php?id=<?php echo $emprestimo->getId(); ?>" id="deletar">Renovar</a>
-                  <?php } ?>
-                  
-                  <?php if(EmprestimoRepository::countByDataAlteracao($emprestimo->getId()) == null && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == null && EmprestimoRepository::countByDataRenovacao($emprestimo->getId())==null){?>
-                            <a href="emprestimo_excluir.php?id=<?php echo $emprestimo->getId();?>" type="button" class="btn btn-danger" href="emprestimo_excluir.php?id=<?php echo ($emprestimo->getDataVencimento()== null );?>" class="data_vencimento">DELETAR</a>
-                            <?php } ?>
+                                <?php if (EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == 0) { ?>
+                                    <a href="emprestimo_devolver.php?id=<?php echo $emprestimo->getId() ?>"  class="btn btn-info">Devolver</a>
+                                <?php } ?>
+
+                                <?php if (EmprestimoRepository::countByDataRenovacao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == 0 && $emprestimo->getDataVencimento() >= date('Y-m-d')) { ?>
+                                    <a href="emprestimo_renovar.php?id=<?php echo $emprestimo->getId(); ?>" class="btn btn-info">Renovar</a>
+                                <?php } ?>
+
+                                <?php if (EmprestimoRepository::countByDataAlteracao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataRenovacao($emprestimo->getId()) == 0) { ?>
+                                    <a onclick="popUpExc(<?php echo $emprestimo->getId() ?>)" type="button" class="btn btn-danger">Excluir</a>
+                            <?php }
+                            } ?>
                             </td>
+
+
                         </tr>
-                    <?php
-                                }}
-                    ?>
+                        <?php
+
+
+                        ?>
                 </tbody>
             </table>
         </div>
     </div>
-    <script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src = "js/jquery.mask.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
     <script>
-        $(document).ready(function(){
-  $('.data_vencimento').mask('00/00/0000');
+        $(document).ready(function() {
+            $('.data_vencimento').mask('00/00/0000');
         })
     </script>
 </body>

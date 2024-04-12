@@ -12,7 +12,7 @@ if(!isset($_POST['id'])){
     header("location: funcionario_listagem.php?1");
     exit();
 }
-if($_POST["id"] == "" || $_POST["id"] == NULL){
+if($_POST["id"] == '' || $_POST["id"] == NULL){
     header("location: funcionario_listagem.php?2");
     exit();
 }
@@ -26,12 +26,12 @@ if(!isset($_POST['nome'])){
     header("Location: funcionario_novo.php?id=".$funcionario->getId());
     exit();
 }
-if($_POST["nome" ] == "" || $_POST["nome" == null]){
+if($_POST["nome" ] == '' || $_POST["nome"] == null){
     header("Location: funcionario_novo.php?id=".$funcionario->getId());
     exit();
 }
 
-
+date_default_timezone_set('America/Sao_Paulo');
 
 $funcionario->setNome($_POST['nome']);
 $funcionario->setCpf($_POST['cpf']);

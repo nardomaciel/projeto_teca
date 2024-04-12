@@ -29,7 +29,7 @@ class Factory{
     public static function emprestimo(){
         $emprestimo = new Emprestimo();
         $datetime = new DateTime();
-        $datetime->add(new DateInterval('P6D')); //Adiciona um dia a data atual
+        $datetime->add(new DateInterval('P7D')); //Adiciona um dia a data atual
         $emprestimo->setDataVencimento($datetime->format("Y-m-d")); 
         
         return $emprestimo;

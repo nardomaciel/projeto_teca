@@ -30,7 +30,7 @@ if (!Auth::isAuthenticated()) {
   <div class="container">
     <div id="titAndButton">
         <h2>AUTORES < LISTAGEM</h2>
-        <button  type="submit" class="btn btn-success"  ><a id="titAndButton"href="autor_novo.php">NOVO AUTOR</a></button>
+        <button  type="submit" class="btn btn-success"  ><a id="titAndButton" href="autor_novo.php">NOVO AUTOR</a></button>
        
     </div>
     <div class="table-responsive">
@@ -49,12 +49,15 @@ if (!Auth::isAuthenticated()) {
               <tr>
                     <td><?php echo $autor->getId(); ?></td>
                     <td><?php echo $autor->getNome(); ?></td>
-                    <br>
+                    
                 <div>
                     <td>
                     <a href=" autor_editar.php?id=<?php echo $autor->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
+
                     <?php if(LivroRepository::countByAutor($autor->getId())== 0){?>
+
                     <a href="autor_excluir.php?id=<?php echo $autor->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
+                    
                     <?php } ?>
                     </td>
                 </div>

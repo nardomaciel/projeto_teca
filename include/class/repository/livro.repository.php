@@ -24,6 +24,30 @@ class LivroRepository implements Repository{
         }
     return $list;
     }
+    public static function listAllWithoutEmprestimoActive(){
+        $db = DB::getInstance();
+
+        $sql = "SELECT * FROM livro where id not in (select livro_id from emprestimo where data_devolucao is null)";
+        $query = $db->prepare($sql);
+        $query->execute();
+        
+        $list = array();
+        foreach($query->fetchAll(PDO::FETCH_OBJ) as $row){
+            $livro = new Livro;
+            $livro->setId($row->id);
+            $livro->setTitulo($row->titulo);
+            $livro->setAno($row->ano);
+            $livro->setGenero($row->genero);
+            $livro->setIsbn($row->isbn); 
+            $livro->setAutorId($row->autor_id);
+            $livro->setDataInclusao($row->data_inclusao);
+            $livro->setDataAlteracao($row->data_alteracao);
+            $livro->setInclusaoFuncionarioId($row->inclusao_funcionario_id);
+            $livro->setAlteracaoFuncionarioId($row->alteracao_funcionario_id);
+            $list[] = $livro;
+        }
+    return $list;
+    }
     public static function get($id){
         $db = DB::getInstance();
 
@@ -77,7 +101,7 @@ class LivroRepository implements Repository{
         $query->bindValue(":genero",$obj->getGenero());
         $query->bindValue(":isbn",$obj->getIsbn());
         $query->bindValue(":autor_id",$obj->getAutorId());
-        $query->bindValue(":alteracao_inclusao",$obj->getDataInclusao());
+        $query->bindValue(":data_inclusao",$obj->getDataInclusao());
         $query->bindValue(":alteracao_funcionario_id",$obj->getInclusaoFuncionarioId());
     }
     public static function delete($id){

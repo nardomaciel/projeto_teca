@@ -9,15 +9,16 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['nome'])){
-    header("Location: funcionario_novo.php");
+    header("Location: funcionario_novo.php?abc");
     exit();
 }
 if($_POST["nome"]== '' || $_POST["nome"] == null){
-    header("Location: funcionario_novo.php");
+    header("Location: funcionario_novo.php?def");
     exit();
 }
 
 $funcionario = Factory::funcionario();
+date_default_timezone_set('America/Sao_Paulo');
 
 $funcionario->setNome($_POST['nome']);
 $funcionario->setCpf($_POST['cpf']);
@@ -25,12 +26,12 @@ $funcionario->setTelefone($_POST['telefone']);
 $funcionario->setSenha($_POST['senha']);
 $funcionario->setEmail($_POST['email']);
 $funcionario->setInclusaoFuncionarioId($user->getID());
-$funcionario->setDataInclusao(date('Y-d-m h:i:s'));
+$funcionario->setDataInclusao(date('Y-d-m H:i:s'));
 
 $funcionario_retorno = FuncionarioRepository::insert($funcionario);
 
 if($funcionario_retorno > 0){
-    header("Location: funcionario_editar.php?id=".$funcionario_retorno);
+    header("Location: funcionario_editar.php?id=errpqp".$funcionario_retorno);
     exit();
 }
 

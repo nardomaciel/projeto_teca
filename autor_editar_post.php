@@ -31,11 +31,11 @@ if($_POST["nome" ] == "" || $_POST["nome" == null]){
     exit();
 }
 
-
+date_default_timezone_set('America/Sao_Paulo');
 
 $autor->setNome($_POST['nome']);
 $autor->setAlteracaoFuncionarioId($user->getID());
-$autor->setDataAlteracao(date('Y-d-m h:i:s'));
+$autor->setDataAlteracao(date('Y-d-m H:i:s'));
 
 AutorRepository::update($autor);
 

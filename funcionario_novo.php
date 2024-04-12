@@ -33,19 +33,19 @@ if (!Auth::isAuthenticated()) {
                 <form action="funcionario_novo_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control" >
+                        <input type="text" name="nome" id="nome" class="form-control" placeholder= "nome funcionario" required>
 
-                        <label for="nome" class="form-label">Cpf</label>
-                        <input type="text" name="cpf" id="nome" class="form-control" >
+                        <label for="cpf" class="form-label">Cpf</label>
+                        <input type="text" name="cpf" id="cpf" class="form-control"placeholder= "000.000.000-00" required>
 
-                        <label for="nome" class="form-label">Telefone</label>
-                        <input type="text" name="email" id="nome" class="form-control" >
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" name="telefone" id="telefone" class="form-control"placeholder= "(00) 00000-0000" required>
 
-                        <label for="nome" class="form-label">Senha</label>
-                        <input type="text" name="telefone" id="nome" class="form-control" >
+                        <label for="senha" class="form-label">Senha</label>
+                        <input type="senha" name="senha" id="senha" class="form-control"placeholder= "sua senha"required >
                         
-                        <label for="nome" class="form-label">Email</label>
-                        <input type="text" name="email" id="nome" class="form-control" >
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control"placeholder= "name@email.com" required>
                         
                     </div>
                     <div class="mb-3">

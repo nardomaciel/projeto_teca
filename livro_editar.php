@@ -46,17 +46,17 @@ if (!$livro) {
             <div class="col-md-12">
                 <form action="livro_editar_post.php" method="POST">
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Titulo</label>
-                        <input type="text" name="titulo" class="form-control" name="id" value="<?php echo $livro->getTitulo() ?>">
+                        <label for="titulo" class="form-label">Titulo</label>
+                        <input type="text" name="titulo" class="form-control"  value="<?php echo $livro->getTitulo() ?>" required>
 
-                        <label for="nome" class="form-label">Ano de lançamento</label>
-                        <input type="text" name="nome" id="nome" class="form-control" name="id" value="<?php echo $livro->getAno() ?>">
+                        <label for="ano" class="form-label">Ano de lançamento</label>
+                        <input type="text" name="ano" id="ano" class="form-control"  value="<?php echo $livro->getAno() ?>" required>
 
-                        <label for="nome" class="form-label">Genero</label>
-                        <input type="text" name="nome" id="nome" class="form-control" name="id" value="<?php echo $livro->getGenero() ?>">
+                        <label for="genero" class="form-label">Genero</label>
+                        <input type="text" name="genero" id="genero" class="form-control"  value="<?php echo $livro->getGenero() ?>" required>
 
                         <label for="autor" class="form-label">id autor</label>
-                        <select name="autor" id="autor" class="form-select form-select-lg mb-3" aria-label="Large select example">
+                        <select name="autor" id="autor" class="form-select form-select-lg mb-3" aria-label="Large select example" required>
                             <?php $autor = AutorRepository::listAll() ?>
                             <?php
                             foreach (AutorRepository::listAll() as $autor) {
@@ -67,11 +67,11 @@ if (!$livro) {
                             <?php } ?>
                         </select>
 
-                        <label for="nome" class="form-label">Isbn</label>
-                        <input type="text" name="nome" id="nome" class="form-control" name="id" value="<?php echo $livro->getIsbn() ?>">
+                        <label for="isbn" class="form-label">Isbn</label>
+                        <input type="text" name="isbn" id="isbn" class="form-control"  value="<?php echo $livro->getIsbn() ?>" required>
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" name="id" value="<?php echo $livro->getId() ?>">
+                        <input type="hidden" value="<?php echo $livro->getId() ?>">
                         <button type="submit" class="btn btn-info">ENVIAR</button>
                     </div>
                 </form>

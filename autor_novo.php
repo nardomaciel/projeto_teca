@@ -33,10 +33,10 @@ if (!Auth::isAuthenticated()) {
                 <form action="autor_novo_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control" >
+                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome do autor" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-info">ENVIAR</button>
+                        <button type1="submit" class="btn btn-info">ENVIAR</button>
                     </div>
                 </form>
             </div>

@@ -1,39 +1,60 @@
 <?php
-include_once('include/factory.php');
+include_once("include/factory.php");
 
 if (!Auth::isAuthenticated()) {
-    header("Location: login.php?1");
+    header("location: login.php");
     exit();
 }
 
 $user = Auth::getUser();
 
-if(!isset($_POST['data_vencimento'])){
-    header("Location: emprestimo_novo.php?2");
-    exit();
-}
-if($_POST["data_vencimento"] == '' || $_POST["data_vencimento"] == null){
-    header("Location: emprestimo_novo.php?3");
+if (!isset($_POST["cliente"])){
+    header("location: emprestimo_novo.php?0");
+
     exit();
 }
 
-$datetime = DateTime::createFromFormat('d/m/Y', $_POST["data_vencimento"]);
-$dateFormatted = $datetime->format('Y-m-d');
+if( $_POST["cliente"] == "" || $_POST ["cliente"] == null){
+    header("location: emprestimo_novo.php?1");
+    
+    exit();
+}
+
+if (!isset($_POST["livro_id"])){
+    header("location: emprestimo_novo.php?2");
+
+    exit();
+}
+
+if( $_POST["livro_id"] == '' || $_POST ["livro_id"] == null){
+    header("location: emprestimo_novo.php?3");
+    
+    exit();
+}
+
+
+if(
+    EmprestimoRepository::countByClienteWithNotFinished($_POST["cliente_id"]) > 0
+    ||
+    EmprestimoRepository::countByLivroWithNotFinished($_POST["livro_id"] > 0)
+){
+    header("location: emprestimo_novo.php");
+}
+
 $emprestimo = Factory::emprestimo();
-
-echo $dateFormatted;
-$emprestimo->setClienteId($_POST['cliente_id']);
-$emprestimo->setLivroId($_POST['livro_id']);
-$emprestimo->setDataVencimento($dateFormatted);
+date_default_timezone_set('America/Sao_Paulo');
+$emprestimo->setLivroId($_POST["livro_id"]);
+$emprestimo->setClienteId($_POST["cliente"]);
 $emprestimo->setInclusaoFuncionarioId($user->getId());
-$emprestimo->setDataInclusao(date('Y-m-d H:i:s'));
-echo $emprestimo->getDataVencimento();
+$emprestimo->setDataInclusao(date("Y-m-d H:i:s"));
+
 $emprestimo_retorno = EmprestimoRepository::insert($emprestimo);
 
 if($emprestimo_retorno > 0){
-    header("Location: emprestimo_listagem.php");
+    header("location: emprestimo_listagem.php?id=". $emprestimo_retorno);
     exit();
 }
 
-header("Location: emprestimo_novo.php");
-    exit();
+header("location: emprestimo_novo.php");
+
+?>

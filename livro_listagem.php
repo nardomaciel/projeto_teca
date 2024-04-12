@@ -60,6 +60,7 @@ if (!Auth::isAuthenticated()) {
                 <div id="titAndButton">
                   <td>
                     <a href="livro_editar.php?id=<?php echo $livro->getId(); ?>" type="button" class="btn btn-primary">EDITAR</a>
+                    
                     <?php if(EmprestimoRepository::countByLivros($livro->getId())== 0){?>
                     <a href="livro_excluir.php?id=<?php echo $livro->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
                     <?php } ?>

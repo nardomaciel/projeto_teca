@@ -3,7 +3,7 @@
 class EmprestimoRepository implements Repository{
     public static function listAll(){
         $db = DB::getInstance();
-        $sql = "SELECT * FROM emprestimo";
+        $sql = "SELECT * FROM emprestimo ORDER BY id  DESC";
         $query = $db->prepare($sql);
         $query->execute();
 
@@ -199,15 +199,17 @@ class EmprestimoRepository implements Repository{
     }
     public static function update($obj){
         $db = DB::getInstance();
-        $sql = "UPDATE emprestimo SET data_vencimento = :data_vencimento, data_alteracao = :data_alteracao, data_renovacao = :data_renovacao, alteracao_funcionario_id = :alteracao_funcionario_id, renovacao_funcionario_id WHERE id = :id";
+        $sql = "UPDATE emprestimo SET data_vencimento = :data_vencimento, data_alteracao = :data_alteracao, data_renovacao = :data_renovacao, data_devolucao = :data_devolucao, alteracao_funcionario_id = :alteracao_funcionario_id, renovacao_funcionario_id = :renovacao_funcionario_id, devolucao_funcionario_id = :devolucao_funcionario_id WHERE id = :id";
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(':id', $obj->getId());
-        $query->bindValue(':data_vencimento' ,$obj->getDataVencimento());
+        $query->bindValue(':data_vencimento' ,$obj->getDataVencimento('Y-m-d'));
         $query->bindValue(':data_alteracao', $obj->getDataAlteracao());
         $query->bindValue(':data_renovacao', $obj->getDataRenovacao());
+        $query->bindValue(':data_devolucao', $obj->getDataDevolucao());
         $query->bindValue(':alteracao_funcionario_id', $obj->getAlteracaoFuncionarioId());
         $query->bindValue(':renovacao_funcionario_id',  $obj->getRenovacaoFuncionarioId());
+        $query->bindValue(':devolucao_funcionario_id', $obj->getDevolucaoFuncionarioId());
         $query->execute();
     }
     public static function delete($id){
@@ -331,5 +333,66 @@ class EmprestimoRepository implements Repository{
         $row = $query->fetch(PDO::FETCH_ASSOC);
         return $row["count(*)"];
     }
+    public static function countByClienteWithNotFinished($cliente_id){
+        $db = DB::getInstance();
 
+        $sql = 'SELECT count(*) FROM emprestimo WHERE cliente_id = :cliente_id AND data_devolucao IS NULL'; 
+
+        $query = $db->prepare($sql);
+        $query->bindValue(":cliente_id",$cliente_id);
+        $query->execute();
+
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        return $row["count(*)"];
+    }
+
+    public static function countByLivroWithNotFinished($livro_id){
+        $db = DB::getInstance();
+
+        $sql = 'SELECT count(*) FROM emprestimo WHERE livro_id = :livro_id AND data_devolucao IS NULL'; 
+
+        $query = $db->prepare($sql);
+        $query->bindValue(":livro_id",$livro_id);
+        $query->execute();
+
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        return $row["count(*)"];
+    }
+    public static function isMulta($emprestimo_id){
+        $db = DB::getInstance();
+
+        $sql = 'SELECT count(*) FROM emprestimo WHERE data_renovacao IS NOT NULL AND data_vencimento = :';  
+
+        $query = $db->prepare($sql);
+        $query->bindValue(":emprestimo_id",$emprestimo_id);
+        $query->execute();
+
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        return $row["count(*)"];
+        }
+        public static function countByLivrosDevol($livro_id){ // Conta quantos emprestimos existem com o mesmo livro
+            $db = DB::getInstance();
+    
+            $sql = 'SELECT count(*) FROM emprestimo WHERE livro_id = :livro_id and data_devolucao is not null'; 
+    
+            $query = $db->prepare($sql);
+            $query->bindValue(":livro_id",$livro_id);
+            $query->execute();
+    
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+            return $row["count(*)"];
+        }
+    
+        public static function countByClientesDevol($cliente_id){ 
+            $db = DB::getInstance();
+    
+            $sql = 'SELECT count(*) FROM emprestimo WHERE cliente_id = :cliente_id and data_devolucao is not null'; 
+    
+            $query = $db->prepare($sql);
+            $query->bindValue(":cliente_id",$cliente_id);
+            $query->execute();
+    
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+            return $row["count(*)"];
+        }
 }

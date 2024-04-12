@@ -56,12 +56,15 @@ if (!Auth::isAuthenticated()) {
                     <td><?php echo $cliente->getCpf(); ?></td>
                     <td><?php echo $cliente->getRg(); ?></td>
                     <td><?php echo $cliente->getDataNascimento(); ?></td>
-                    <br>
+                    
                 <div  id="titAndButton">
                     <td>
                     <a href="cliente_editar.php?id=<?php echo $cliente->getId();?>" type="button" class="btn btn-primary">EDITAR</a>
+
                     <?php if(EmprestimoRepository::countByClientes($cliente->getId())== 0){?>
+                      
                     <a href="cliente_excluir.php?id=<?php echo $cliente->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
+                    
                     <?php } ?>
                     </td>
                 </div>

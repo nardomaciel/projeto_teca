@@ -32,7 +32,7 @@ if (!Auth::isAuthenticated()) {
               <th>Livro</th>
               <th>Cliente</th>
               <th>Vencimento</th>
-              <th>Devolução</th>
+              
             </tr>
           </thead>
           <tbody>

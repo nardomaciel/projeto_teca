@@ -18,10 +18,10 @@ if (!Auth::isAuthenticated()) {
 </head>
 
 <body>
-  <?php include("include/menu.php") ?>
+  <?php include("include/navbar.php") ?>
   <main>
     <div class="container">
-        <h2>Emprestimo > Listagem</h2>
+        <h2>Emprestimo > devolvidos</h2>
         <a href="emprestimo_listagem.php" class="btn btn-warning">VOLTAR</a>
       <div class="table-responsive">
         <table class="table">
@@ -52,7 +52,7 @@ if (!Auth::isAuthenticated()) {
                     ?>
                 </td>
                 <td><?php echo $emprestimo->dtDataVencimento("d/m/Y"); ?></td>
-                <td><?php echo $emprestimo->dtDataDevolucao("d/m/Y"); ?></td>
+                <td><?php echo $emprestimo->getDataDevolucao("d/m/Y"); ?></td>
                 
 
               </tr>

@@ -49,7 +49,12 @@ class Cliente
     public function setRg($rg){
         $this->rg = $rg;
     }
-    public function getDataNascimento(){
+    public function getDataNascimento($format = "Y-m-d"){
+        $datetime = DateTime::createFromFormat("Y-m-d H:i:s", $this->data_nascimento);
+
+        if($datetime){
+            return $datetime->format($format);
+        }
         return $this->data_nascimento;
     }
     public function setDataNascimento($data_nascimento){
@@ -79,4 +84,8 @@ class Cliente
     public function setAlteracaoFuncionarioId($alteracao_funcionario_id){
         $this->alteracao_funcionario_id = $alteracao_funcionario_id;
  }
+ public function dtDataNascimento($format = 'd-m-Y'){
+    $datetime = DateTime::createFromFormat('Y-m-d', $this->data_nascimento);
+    return $datetime->format($format);
+}
 }

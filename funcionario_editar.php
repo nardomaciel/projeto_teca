@@ -8,7 +8,7 @@ if(!isset($_GET['id'])){
     header("location: funcionario_listagem.php?1");
     exit();
 }
-if($_GET["id"] == "" || $_GET["id"] == NULL){
+if($_GET["id"] == '' || $_GET["id"] == NULL){
     header("location: funcionario_listagem.php?2");
     exit();
 }
@@ -41,30 +41,31 @@ if(!$funcionario){
 
         <h1>EDITAR FUNCIONARIO</h1>
         <a type="button" class="btn btn-warning" href="funcionario_listagem.php">VOLTAR</a>
-        <a type="button" class="btn btn-warning" href="funcionario_novo.php">NOVO</a>
         <div class="row mt-4">
             <div class="col-md-12">
                 <form action="funcionario_editar_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $funcionario->getNome()?>">
+                        <input type="text" name="nome" class="form-control"  value="<?php echo $funcionario->getNome()?>" placeholder="nome funcionario" required>
 
-                        <label for="nome" class="form-label">Telefone</label>
-                        <input type="text" name="telefone" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getTelefone()?>">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" name="telefone" id="telefone" class="form-control"  value="<?php echo $funcionario->getTelefone()?>" placeholder="(00) 00000-0000" required>
                         
-                        <label for="nome" class="form-label">Cpf</label>
-                        <input type="text" name="cpf" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getCpf()?>">
+                        <label for="cpf" class="form-label">Cpf</label>
+                        <input type="text" name="cpf" id="cpf" class="form-control"  value="<?php echo $funcionario->getCpf()?>" placeholder="000.000.000-00" required>
 
-                        <label for="nome" class="form-label">Email</label>
-                        <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $funcionario->getEmail()?>">
-                        <a href="funcionario_editar_senha.php?id=<?php echo($funcionario->getId());?>" class="btn btn-warning">editar senha</a>
-                    
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control"  value="<?php echo $funcionario->getEmail()?>" placeholder="name@email.com" required>
+                        
+                        <div class="mb-3">
+                            <a href="funcionario_editar_senha.php?id=<?php echo($funcionario->getId());?>" class="btn btn-warning">editar senha</a>
+                        </div>
                        
                     
                     </div>
                     <div class="mb-3">
                         <input type="hidden" name="id" value="<?php echo $funcionario->getId()?>">
-                        <button type="submit" class="btn btn-info">ENVIAR</button>
+                        <button type="submit" class="btn btn-info">EDITAR</button>
                     </div>
                 </form>
             </div>

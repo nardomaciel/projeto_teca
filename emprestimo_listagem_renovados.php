@@ -12,16 +12,16 @@ if (!Auth::isAuthenticated()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMPRESTIMO RENOVADOS</title>
+  <title>EMPRESTIMO NAO RENOVADOS</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+  
+ 
 </head>
 
 <body>
   <?php include("include/navbar.php") ?>
   <main>
     <div class="container">
-     
         <h2>Emprestimo > Listagem</h2>
         <a href="emprestimo_listagem.php" class="btn btn-warning">VOLTAR</a>
       <div class="table-responsive">
@@ -32,13 +32,12 @@ if (!Auth::isAuthenticated()) {
               <th>Livro</th>
               <th>Cliente</th>
               <th>Vencimento</th>
-              <th>Devolução</th>
+             
             </tr>
           </thead>
           <tbody>
               <?php
-              foreach(EmprestimoRepository::listaRenovacao() as $emprestimo){
-
+              foreach(EmprestimoRepository::listaNaoRenovados() as $emprestimo){
               ?>
               <tr>
                 <td><?php echo $emprestimo->getId(); ?></td>

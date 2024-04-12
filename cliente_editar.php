@@ -47,22 +47,22 @@ if(!$cliente){
                 <form action="cliente_editar_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $cliente->getNome()?>">
+                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $cliente->getNome()?>"placeholder="digite o nome do cliente" required>
 
                         <label for="nome" class="form-label">Telefone</label>
-                        <input type="text" name="telefone" id="nome" class="form-control" name="id" value="<?php echo $cliente->getTelefone()?>">
+                        <input type="text" name="telefone" id="nome" class="form-control" name="id" value="<?php echo $cliente->getTelefone()?>" placeholder="(00) 00000-0000">
 
                         <label for="nome" class="form-label">Email</label>
-                        <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $cliente->getEmail()?>">
+                        <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $cliente->getEmail()?>" placeholder="name@email.com">
 
                         <label for="nome" class="form-label">Cpf</label>
-                        <input type="text" name="cpf" id="nome" class="form-control" name="id" value="<?php echo $cliente->getCpf()?>">
+                        <input type="text" name="cpf" id="nome" class="form-control" name="id" value="<?php echo $cliente->getCpf()?>" placeholder="000.000.000-00">
                         
                         <label for="nome" class="form-label">Rg</label>
-                        <input type="text" name="rg" id="nome" class="form-control" name="id" value="<?php echo $cliente->getRg()?>">
+                        <input type="text" name="rg" id="nome" class="form-control" name="id" value="<?php echo $cliente->getRg()?>" placeholder="00.000.000-0" required>
 
-                        <label for="nome" class="form-label">Data de nascimento</label>
-                        <input type="text" name="data de nascimento" id="nome" class="form-control data_nascimento" name="id" value="<?php echo $cliente->getDataNascimento()?>">
+                        <label for="data_nascimento" class="form-label">Data de nascimento</label>
+                        <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" value="<?php echo $cliente->getDataNascimento()?>" placeholder="dd/mm/aaaa">
                     </div>
                     <div class="mb-3">
                         <input type="hidden" name="id" value="<?php echo $cliente->getId()?>">
