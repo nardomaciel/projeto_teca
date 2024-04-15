@@ -70,7 +70,7 @@ if (!Auth::isAuthenticated()) {
                                 <?php } ?>
 
                                 <?php if (EmprestimoRepository::countByDataRenovacao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == 0 && $emprestimo->getDataVencimento() >= date('Y-m-d')) { ?>
-                                    <a href="emprestimo_renovar.php?id=<?php echo $emprestimo->getId(); ?>" class="btn btn-info">Renovar</a>
+                                    <a href="emprestimo_renovar.php?id=<?php echo $emprestimo->getId(); ?>" class="btn btn-warning">Renovar</a>
                                 <?php } ?>
 
                                 <?php if (EmprestimoRepository::countByDataAlteracao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataRenovacao($emprestimo->getId()) == 0) { ?>

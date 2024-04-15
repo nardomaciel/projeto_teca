@@ -9,36 +9,28 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['id'])){
-    header("location:livro_listagem.php?10");
+    header("location:livro_listagem.php?");
     exit();
 }
 if($_POST["id"] == "" || $_POST["id"] == NULL){
-    header("location: livro_listagem.php?2");
+    header("location: livro_listagem.php?");
     exit();
 }
 $livro = LivroRepository::get($_POST["id"]);
 if(!$livro){
-    header("location: livro_listagem.php?3");
+    header("location: livro_listagem.php?");
     exit();
 }
 
 if(!isset($_POST['titulo'])){
-    header("Location: livro_editar.php?id=".$livro->getId());
+    header("Location: livro_editar.php?id=".$livro->getId()."90");
     exit();
 }
 if($_POST["titulo" ] == '' || $_POST["titulo"] == null){
-    header("Location: livro_editar.php?id=");
+    header("Location: livro_editar.php?id=".$livro->getId()."sdgsdg");
     exit();
 }
 
-if(!isset($_POST['isbn'])){
-    header("Location: livro_editar.php?id=".$livro->getId());
-    exit();
-}
-if($_POST["isbn" ] == '' || $_POST["isbn"] == null){
-    header("Location: livro_editar.php?id=");
-    exit();
-}
 
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -54,5 +46,5 @@ $livro->setDataAlteracao(date('Y-d-m H:i:s'));
 LivroRepository::update($livro);
 
 
-header("location:livro_editar.php?id=".$livro->getId());
+header("location:livro_editar.php?id=".$livro->getId()."ultimo");
  

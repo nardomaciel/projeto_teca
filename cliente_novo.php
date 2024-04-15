@@ -35,19 +35,19 @@ if (!Auth::isAuthenticated()) {
                         <label for="nome" class="form-label">Nome</label>
                         <input type="text" name="nome" id="nome" class="form-control"  placeholder="nome"required>
 
-                        <label for="nome" class="form-label">Telefone</label>
-                        <input type="text" name="telefone" id="nome" class="form-control" placeholder="(ddd) 99999-9999" required>
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(99) 99999-9999" required>
 
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" class="form-control" placeholder="name@email.com" required>
 
-                        <label for="nome" class="form-label">Cpf</label>
-                        <input type="text" name="cpf" id="nome" class="form-control" placeholder="000.000.000-00" required>
+                        <label for="cpf" class="form-label">Cpf</label>
+                        <input type="text" name="cpf" id="cpf" class="form-control" placeholder="000.000.000-00" required>
 
-                        <label for="nome" class="form-label">Rg</label>
-                        <input type="text" name="rg" id="nome" class="form-control" placeholder="00.000.000-0" required>
+                        <label for="rg" class="form-label">Rg</label>
+                        <input type="text" name="rg" id="rg" class="form-control" placeholder="00.000.000-0" required>
 
-                        <label for="nome" class="form-label">Data de nascimento</label>
+                        <label for="data_nascimento" class="form-label">Data de nascimento</label>
                         <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" placeholder="dd/mm/aaaa" required>
                         
                     </div>
@@ -63,6 +63,9 @@ if (!Auth::isAuthenticated()) {
     <script>
         $(document).ready(function() {
             $('.data_nascimento').mask('00/00/0000');
+            $('#cpf').mask('000.000.000-00', {reverse: true});
+            $('#rg').mask('00.000.000-0', {reverse: true});
+            $('#telefone').mask('(00) 00000-0000');
         });
     </script>
 </body>

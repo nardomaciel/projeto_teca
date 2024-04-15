@@ -86,6 +86,7 @@ $emprestimo = Factory::emprestimo();
     <script>
         $(document).ready(function() {
             $("#data_vencimento").mask("00/00/0000")
+            
         });
     </script>
 </body>

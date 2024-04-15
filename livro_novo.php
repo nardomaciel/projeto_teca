@@ -62,6 +62,13 @@ if (!Auth::isAuthenticated()) {
             </div>
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+    <script>
+       $(document).ready(function() {
+            $('#ano').mask('0000', {reverse: true});
+        });
+    </script>
 </body>
 
 </html>

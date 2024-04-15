@@ -71,5 +71,13 @@ if(!$funcionario){
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+    <script>
+       $(document).ready(function() {
+            $('#cpf').mask('000.000.000-00', {reverse: true});
+            $('#telefone').mask('(00) 00000-0000');
+        });
+    </script>
 </body>
 </html>

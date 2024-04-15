@@ -5,16 +5,16 @@ if (!Auth::isAuthenticated()) {
     exit();
 }
 if (!isset($_GET['id'])) {
-    header("location: livro_listagem.php?1");
+    header("location: livro_listagem.php?");
     exit();
 }
 if ($_GET["id"] == "" || $_GET["id"] == NULL) {
-    header("location: livro_listagem.php?2");
+    header("location: livro_listagem.php?");
     exit();
 }
 $livro = LivroRepository::get($_GET["id"]);
 if (!$livro) {
-    header("location: livro_listagem.php?3");
+    header("location: livro_listagem.php?");
     exit();
 }
 ?>
@@ -56,7 +56,7 @@ if (!$livro) {
                         <input type="text" name="genero" id="genero" class="form-control"  value="<?php echo $livro->getGenero() ?>" required>
 
                         <label for="autor" class="form-label">id autor</label>
-                        <select name="autor" id="autor" class="form-select form-select-lg mb-3" aria-label="Large select example" required>
+                        <select name="autor_id" id="autor" class="form-select form-select-lg mb-3" aria-label="Large select example" required>
                             <?php $autor = AutorRepository::listAll() ?>
                             <?php
                             foreach (AutorRepository::listAll() as $autor) {
@@ -71,13 +71,20 @@ if (!$livro) {
                         <input type="text" name="isbn" id="isbn" class="form-control"  value="<?php echo $livro->getIsbn() ?>" required>
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" value="<?php echo $livro->getId() ?>">
+                        <input type="hidden" name="id" value="<?php echo $livro->getId() ?>">
                         <button type="submit" class="btn btn-info">ENVIAR</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+    <script>
+       $(document).ready(function() {
+            $('#ano').mask('0000', {reverse: true});
+        });
+    </script>
 </body>
 
 </livro
