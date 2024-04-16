@@ -5,16 +5,16 @@ if (!Auth::isAuthenticated()) {
     exit();
 }
 if(!isset($_GET['id'])){
-    header("location: funcionario_listagem.php?0");
+    header("location: funcionario_listagem.php");
     exit();
 }
 if($_GET["id"] == "" || $_GET["id"] == NULL){
-    header("location: funcionario_listagem.php?2");
+    header("location: funcionario_listagem.php");
     exit();
 }
 $funcionario = FuncionarioRepository::get($_GET["id"]);
 if(!$funcionario){
-    header("location: funcionario_listagem.php?3");
+    header("location: funcionario_listagem.php");
     exit();
 }
 ?>

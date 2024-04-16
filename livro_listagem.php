@@ -31,7 +31,10 @@ if (!Auth::isAuthenticated()) {
     <div class="container">
       <div id="titAndButton">
         <h2>LIVRO < LISTAGEM </h2>
-        <a href="livro_novo.php" class="btn btn-success">NOVO LIVRO</a>
+        <td>
+          <a href="livro_novo.php" class="btn btn-success">NOVO LIVRO</a>
+          <a href="index.php" class="btn btn-warning">VOLTAR</a>
+        </td>
       </div>
       <div class="table-responsive">
         <table class="table">

@@ -9,19 +9,33 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_GET['id'])){
-    header("location: emprestimo_listagem.php?1");
+    header("location: emprestimo_listagem.php");
     exit();
 }
-if($_GET["id"] == "" || $_GET["id"] == NULL){
-    header("location: emprestimo_listagem.php?2");
+if($_GET["id"] == "" || $_GET["id"] == null){
+    header("location: emprestimo_listagem.php");
     exit();
 }
 $emprestimo = EmprestimoRepository::get($_GET["id"]);
 if(!$emprestimo){
-    header("location: emprestimo_listagem.php?3");
+    header("location: emprestimo_listagem.php");
     exit();
+}
+
+if(EmprestimoRepository::countByDataDevolucao($_GET["id"]) > 0){
+    header("location: emprestimo_listagem.php");
+    exit(); 
+}
+if(EmprestimoRepository::countByDataRenovacao($_GET["id"]) > 0){
+    header("location: emprestimo_listagem.php");
+    exit(); 
+}
+if(EmprestimoRepository::countByDataAlteracao($_GET["id"]) > 0){
+    header("location: emprestimo_listagem.php");
+    exit(); 
 }
 
 
 EmprestimoRepository::delete($emprestimo->getId());
-header("location:emprestimo_listagem.php");
+
+header("Location: emprestimo_listagem.php");

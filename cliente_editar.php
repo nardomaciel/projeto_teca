@@ -5,16 +5,16 @@ if (!Auth::isAuthenticated()) {
     exit();
 }
 if(!isset($_GET['id'])){
-    header("location: cliente_listagem.php?1");
+    header("location: cliente_listagem.php");
     exit();
 }
 if($_GET["id"] == "" || $_GET["id"] == NULL){
-    header("location: cliente_listagem.php?2");
+    header("location: cliente_listagem.php");
     exit();
 }
 $cliente = ClienteRepository::get($_GET["id"]);
 if(!$cliente){
-    header("location: cliente_listagem.php?3");
+    header("location: cliente_listagem.php");
     exit();
 }
 ?>
@@ -62,7 +62,7 @@ if(!$cliente){
                         <input type="text" name="rg" id="rg" class="form-control" name="id" value="<?php echo $cliente->getRg()?>" placeholder="00.000.000-0" required>
 
                         <label for="data_nascimento" class="form-label">Data de nascimento</label>
-                        <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" value="<?php echo $cliente->getDataNascimento()?>" placeholder="dd/mm/aaaa">
+                        <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" value="<?php echo $cliente->getDataNascimento('d/m/Y')?>" placeholder="dd/mm/aaaa">
                     </div>
                     <div class="mb-3">
                         <input type="hidden" name="id" value="<?php echo $cliente->getId()?>">

@@ -9,16 +9,16 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['id'])){
-    header("location: autor_listagem.php?1");
+    header("location: autor_listagem.php");
     exit();
 }
 if($_POST["id"] == "" || $_POST["id"] == NULL){
-    header("location: autor_listagem.php?2");
+    header("location: autor_listagem.php");
     exit();
 }
 $autor = AutorRepository::get($_POST["id"]);
 if(!$autor){
-    header("location: autor_listagem.php?3");
+    header("location: autor_listagem.php");
     exit();
 }
 

@@ -9,16 +9,16 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['id'])){
-    header("location: funcionario_listagem.php?1");
+    header("location: funcionario_listagem.php");
     exit();
 }
 if($_POST["id"] == '' || $_POST["id"] == NULL){
-    header("location: funcionario_listagem.php?2");
+    header("location: funcionario_listagem.php");
     exit();
 }
 $funcionario = FuncionarioRepository::get($_POST["id"]);
 if(!$funcionario){
-    header("location: funcionario_listagem.php?3");
+    header("location: funcionario_listagem.php");
     exit();
 }
 

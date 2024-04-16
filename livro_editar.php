@@ -5,16 +5,16 @@ if (!Auth::isAuthenticated()) {
     exit();
 }
 if (!isset($_GET['id'])) {
-    header("location: livro_listagem.php?");
+    header("location: livro_listagem.php");
     exit();
 }
 if ($_GET["id"] == "" || $_GET["id"] == NULL) {
-    header("location: livro_listagem.php?");
+    header("location: livro_listagem.php");
     exit();
 }
 $livro = LivroRepository::get($_GET["id"]);
 if (!$livro) {
-    header("location: livro_listagem.php?");
+    header("location: livro_listagem.php");
     exit();
 }
 ?>

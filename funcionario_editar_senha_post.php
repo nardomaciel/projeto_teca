@@ -9,29 +9,29 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['id'])){
-    header("location: funcionario_listagem.php?1");
+    header("location: funcionario_listagem.php");
     exit();
 }
 if($_POST["id"] == '' || $_POST["id"] == NULL){
-    header("location: funcionario_listagem.php?2");
+    header("location: funcionario_listagem.php");
     exit();
 }
 $funcionario = FuncionarioRepository::get($_POST["id"]);
 if(!$funcionario){
-    header("location: funcionario_listagem.php?3");
+    header("location: funcionario_listagem.php");
     exit();
 }
 
 if(!isset($_POST['senha'])){
-    header("Location: funcionario_editar.php?4id=".$funcionario->getId());
+    header("Location: funcionario_editar.php?id=".$funcionario->getId());
     exit();
 }
 if($_POST["senha" ] == '' || $_POST["senha"] == null){
-    header("Location: funcionario_editar.php?5id=".$funcionario->getId());
+    header("Location: funcionario_editar.php?id=".$funcionario->getId());
     exit();
 }
 if($_POST["senha" ] != $_POST["repSenha"]){
-    header("Location: funcionario_editar.php?6id=".$funcionario->getId());
+    header("Location: funcionario_editar.php?id=".$funcionario->getId());
     exit();
 }
 
@@ -44,5 +44,5 @@ $funcionario->setDataInclusao(date('Y-d-m H:i:s'));
 FuncionarioRepository::update($funcionario);
 
 
-header("location:funcionario_editar.php?7id=".$funcionario->getId());
+header("location:funcionario_editar.php?id=".$funcionario->getId());
  

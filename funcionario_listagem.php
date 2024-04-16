@@ -29,6 +29,7 @@ if (!Auth::isAuthenticated()) {
     <div id="titAndButton">
       <h2>FUNCIONARIO < LISTAGEM</h2>
           <a href="funcionario_novo.php" class="btn btn-success">NOVO FUNCIONARIO</a>
+          <a href="index.php" class="btn btn-warning">VOLTAR</a>
     </div>
     <div class="table-responsive">
       <table class="table">

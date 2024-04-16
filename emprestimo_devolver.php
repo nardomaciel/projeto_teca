@@ -2,20 +2,20 @@
 include_once("include/factory.php");
 
 if (!Auth::isAuthenticated()) {
-    header("Location: login.php?");
+    header("Location: login.php");
     exit();
 }
 if(!isset($_GET['id'])){
-    header("location: emprestimo_listagem.php?1");
+    header("location: emprestimo_listagem.php");
     exit();
 }
 if($_GET["id"] == "" || $_GET["id"] == null){
-    header("location: emprestimo_listagem.php?2");
+    header("location: emprestimo_listagem.php");
     exit();
 }
 $emprestimo = EmprestimoRepository::get($_GET["id"]);
 if(!$emprestimo){
-    header("location: emprestimo_listagem.php?3");
+    header("location: emprestimo_listagem.php");
     exit();
 }
 

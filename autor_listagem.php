@@ -15,12 +15,13 @@ if (!Auth::isAuthenticated()) {
   <style> 
     #titAndButton{
         display: flex;
-        align-items: center;
+        align-items: right;
         justify-content: space-between;
-        color: black;
-        text-decoration: none;
+       
+       
 
     }
+  
    
   </style>
 </head>
@@ -28,9 +29,10 @@ if (!Auth::isAuthenticated()) {
     <?php include("include/navbar.php"); ?>
 
   <div class="container">
-    <div id="titAndButton">
-        <h2>AUTORES < LISTAGEM</h2>
-        <button  type="submit" class="btn btn-success"  ><a id="titAndButton" href="autor_novo.php">NOVO AUTOR</a></button>
+    <div >
+        <h2 >AUTORES < LISTAGEM</h2>
+         <a href="autor_novo.php" type="submit" class="btn btn-success" >NOVO AUTOR</a>
+         <a href="index.php" class="btn btn-warning">VOLTAR</a>
        
     </div>
     <div class="table-responsive">

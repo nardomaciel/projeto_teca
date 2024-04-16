@@ -8,16 +8,16 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['id'])){
-    header("location: emprestimo_listagem.php?1");
+    header("location: emprestimo_listagem.php");
     exit();
 }
 if($_POST["id"] == '' || $_POST["id"] == null){
-    header("location: emprestimo_listagem.php?2");
+    header("location: emprestimo_listagem.php");
     exit();
 }
 $emprestimo = EmprestimoRepository::get($_POST["id"]);
 if(!$emprestimo){
-    header("location: emprestimo_listagem.php?3");
+    header("location: emprestimo_listagem.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if (!(
     $emprestimo->getDataRenovacao() == null &&
     $emprestimo->getDataAlteracao() == null
     )){
-        header("location: emprestimo_listagem.php?4");
+        header("location: emprestimo_listagem.php");
         exit();
     }
 if ($emprestimo->getDataVencimento() < date("Y-m-d")){
@@ -48,4 +48,4 @@ $emprestimo->setDataVencimento($novo_emprestimo->getDataVencimento());
 
 EmprestimoRepository::update($emprestimo);
 
-header("Location: emprestimo_listagem.php?5");
+header("Location: emprestimo_listagem.php");

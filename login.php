@@ -28,7 +28,14 @@
         </form>
         <p id="error-message"></p>
     </div>
- 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+ <script>
+    $(document).ready(function() { 
+            $('#cpf').mask('000.000.000-00', {reverse: true});
+            
+        });
+ </script>
 </body>
 
 </html>

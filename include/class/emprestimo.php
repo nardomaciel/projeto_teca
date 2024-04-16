@@ -36,7 +36,12 @@ class Emprestimo{
         $this->cliente_id = $cliente_id;
     }
 
-    public function getDataVencimento(){
+    public function getDataVencimento( $format = "Y-m-d"){
+        $datetime = DateTime::createFromFormat("Y-m-d", $this->data_vencimento);
+
+        if($datetime){
+            return $datetime->format($format);
+        }
         return $this->data_vencimento;
     }
 
@@ -69,7 +74,6 @@ class Emprestimo{
     }
 
     public function getDataDevolucao($format = "Y-m-d H:i:s"){
-        date_default_timezone_set('America/Sao_Paulo');
 
         $datetime = DateTime::createFromFormat("Y-m-d H:i:s", $this->data_devolucao);
 

@@ -9,11 +9,11 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['titulo'])){
-    header("Location: livro_novo.php?1");
+    header("Location: livro_novo.php");
     exit();
 }
 if($_POST["titulo"] == '' || $_POST["titulo"] == null){
-    header("Location: livro_novo.php?2");
+    header("Location: livro_novo.php");
     exit();
 }
 
@@ -35,5 +35,5 @@ if($livro_retorno > 0){
     exit();
 }
 
-header("Location: livro_novo.php?3");
+header("Location: livro_novo.php");
     exit();

@@ -50,7 +50,7 @@ class Cliente
         $this->rg = $rg;
     }
     public function getDataNascimento($format = "Y-m-d"){
-        $datetime = DateTime::createFromFormat("Y-m-d H:i:s", $this->data_nascimento);
+        $datetime = DateTime::createFromFormat("Y-m-d", $this->data_nascimento);
 
         if($datetime){
             return $datetime->format($format);

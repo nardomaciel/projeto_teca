@@ -27,6 +27,7 @@ if (!Auth::isAuthenticated()) {
     <div id="titAndButton">
         <h2>CLIENTES < LISTAGEM</h2>
         <a href="cliente_novo.php" class="btn btn-success">NOVO CLIENTE</a>
+        <a href="index.php" class="btn btn-warning">VOLTAR</a>
     </div>
     <div class="table-responsive">
       <table class="table">
@@ -55,7 +56,7 @@ if (!Auth::isAuthenticated()) {
                     <td><?php echo $cliente->getEmail(); ?></td>
                     <td><?php echo $cliente->getCpf(); ?></td>
                     <td><?php echo $cliente->getRg(); ?></td>
-                    <td><?php echo $cliente->getDataNascimento(); ?></td>
+                    <td><?php echo $cliente->getDataNascimento('d/m/Y'); ?></td>
                     
                 <div  id="titAndButton">
                     <td>

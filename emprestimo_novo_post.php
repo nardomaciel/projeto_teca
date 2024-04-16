@@ -9,25 +9,25 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if (!isset($_POST["cliente"])){
-    header("location: emprestimo_novo.php?0");
+    header("location: emprestimo_novo.php");
 
     exit();
 }
 
 if( $_POST["cliente"] == "" || $_POST ["cliente"] == null){
-    header("location: emprestimo_novo.php?1");
+    header("location: emprestimo_novo.php");
     
     exit();
 }
 
 if (!isset($_POST["livro_id"])){
-    header("location: emprestimo_novo.php?2");
+    header("location: emprestimo_novo.php");
 
     exit();
 }
 
 if( $_POST["livro_id"] == '' || $_POST ["livro_id"] == null){
-    header("location: emprestimo_novo.php?3");
+    header("location: emprestimo_novo.php");
     
     exit();
 }
@@ -52,7 +52,7 @@ $emprestimo->setDataInclusao(date("Y-m-d H:i:s"));
 $emprestimo_retorno = EmprestimoRepository::insert($emprestimo);
 
 if($emprestimo_retorno > 0){
-    header("location: emprestimo_listagem.php?id=". $emprestimo_retorno);
+    header("location: emprestimo_editar.php?id=". $emprestimo_retorno);
     exit();
 }
 

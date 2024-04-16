@@ -9,16 +9,16 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['id'])){
-    header("location:livro_listagem.php?");
+    header("location:livro_listagem.php");
     exit();
 }
 if($_POST["id"] == "" || $_POST["id"] == NULL){
-    header("location: livro_listagem.php?");
+    header("location: livro_listagem.php");
     exit();
 }
 $livro = LivroRepository::get($_POST["id"]);
 if(!$livro){
-    header("location: livro_listagem.php?");
+    header("location: livro_listagem.php");
     exit();
 }
 

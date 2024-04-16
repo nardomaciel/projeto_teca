@@ -29,6 +29,7 @@ if (!Auth::isAuthenticated()) {
         <div id="titAndButton">
             <h2>EMPRESTIMO < LISTAGEM</h2>
                     <a href="emprestimo_novo.php" class="btn btn-success">NOVO EMPRESTIMO</a>
+                    <a href="index.php" class="btn btn-warning">VOLTAR</a>
         </div>
         <div class="table-responsive">
             <table class="table">
@@ -74,7 +75,7 @@ if (!Auth::isAuthenticated()) {
                                 <?php } ?>
 
                                 <?php if (EmprestimoRepository::countByDataAlteracao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataDevolucao($emprestimo->getId()) == 0 && EmprestimoRepository::countByDataRenovacao($emprestimo->getId()) == 0) { ?>
-                                    <a onclick="popUpExc(<?php echo $emprestimo->getId() ?>)" type="button" class="btn btn-danger">Excluir</a>
+                                    <a href="emprestimo_excluir.php?id=<?php echo $emprestimo->getId();?>" type="button" class="btn btn-danger">excluir</a>
                             <?php }
                             } ?>
                             </td>

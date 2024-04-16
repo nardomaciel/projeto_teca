@@ -9,11 +9,11 @@ if (!Auth::isAuthenticated()) {
 $user = Auth::getUser();
 
 if(!isset($_POST['nome'])){
-    header("Location: autor_novo.php?2");
+    header("Location: autor_novo.php");
     exit();
 }
 if($_POST["nome"] == '' || $_POST["nome"] == null){
-    header("Location: autor_novo.php?3");
+    header("Location: autor_novo.php");
     exit();
 }
 
