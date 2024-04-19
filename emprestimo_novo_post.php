@@ -52,7 +52,7 @@ $emprestimo->setDataInclusao(date("Y-m-d H:i:s"));
 $emprestimo_retorno = EmprestimoRepository::insert($emprestimo);
 
 if($emprestimo_retorno > 0){
-    header("location: emprestimo_editar.php?id=". $emprestimo_retorno);
+    header("location: emprestimo_editar.php?");
     exit();
 }
 

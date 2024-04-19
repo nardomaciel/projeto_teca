@@ -47,19 +47,19 @@ if(!$cliente){
                 <form action="cliente_editar_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $cliente->getNome()?>"placeholder="digite o nome do cliente" required>
+                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $cliente->getNome()?>"placeholder="digite o nome do cliente" required  maxlength="200">
 
                         <label for="telefone" class="form-label">Telefone</label>
                         <input type="text" name="telefone" id="telefone" class="form-control" name="id" value="<?php echo $cliente->getTelefone()?>" placeholder="(00) 00000-0000">
 
                         <label for="nome" class="form-label">Email</label>
-                        <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $cliente->getEmail()?>" placeholder="name@email.com">
+                        <input type="text" name="email" id="nome" class="form-control" name="id" value="<?php echo $cliente->getEmail()?>" placeholder="name@email.com"  maxlength="200">
 
                         <label for="cpf" class="form-label">Cpf</label>
                         <input type="text" name="cpf" id="cpf" class="form-control" name="id" value="<?php echo $cliente->getCpf()?>" placeholder="000.000.000-00">
                         
                         <label for="rg" class="form-label">Rg</label>
-                        <input type="text" name="rg" id="rg" class="form-control" name="id" value="<?php echo $cliente->getRg()?>" placeholder="00.000.000-0" required>
+                        <input type="text" name="rg" id="rg" class="form-control" name="id" value="<?php echo $cliente->getRg()?>" placeholder="00.000.000-0" >
 
                         <label for="data_nascimento" class="form-label">Data de nascimento</label>
                         <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" value="<?php echo $cliente->getDataNascimento('d/m/Y')?>" placeholder="dd/mm/aaaa">

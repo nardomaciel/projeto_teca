@@ -47,10 +47,10 @@ if(!$funcionario){
                     <div class="mb-3">
 
                         <label for="senha" class="form-label" id="senha">Digite a nova senha</label>
-                        <input type="text" name="senha" class="form-control" id="senha" placeholder="nova senha">
+                        <input type="text" name="senha" class="form-control" id="senha" placeholder="nova senha" maxlength="200" >
 
                         <label for="repSenha" class="form-label" id="repSenha">Confirmar senha</label>
-                        <input type="text" name="repSenha" class="form-control" id="repSenha" placeholder="confirmar senha">
+                        <input type="text" name="repSenha" class="form-control" id="repSenha" placeholder="confirmar senha" maxlength="200">
 
                     
                     </div>

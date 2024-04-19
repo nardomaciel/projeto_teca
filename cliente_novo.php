@@ -33,19 +33,19 @@ if (!Auth::isAuthenticated()) {
                 <form action="cliente_novo_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control"  placeholder="nome"required>
+                        <input type="text" name="nome" id="nome" class="form-control"  placeholder="nome"required  maxlength="200">
 
                         <label for="telefone" class="form-label">Telefone</label>
                         <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(99) 99999-9999" required>
 
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="name@email.com" required>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="name@email.com" required  maxlength="200"> 
 
                         <label for="cpf" class="form-label">Cpf</label>
-                        <input type="text" name="cpf" id="cpf" class="form-control" placeholder="000.000.000-00" required>
+                        <input type="text" name="cpf" id="cpf" class="form-control" placeholder="000.000.000-00" >
 
                         <label for="rg" class="form-label">Rg</label>
-                        <input type="text" name="rg" id="rg" class="form-control" placeholder="00.000.000-0" required>
+                        <input type="text" name="rg" id="rg" class="form-control" placeholder="00.000.000-0">
 
                         <label for="data_nascimento" class="form-label">Data de nascimento</label>
                         <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" placeholder="dd/mm/aaaa" required>

@@ -28,7 +28,7 @@ if (!Auth::isAuthenticated()) {
                     <form action="livro_novo_post.php" method="POST">
                         <div class="mt-3">
                             <label for="titulo" class="form-label">Titulo</label>
-                            <input type="text" name="titulo" id="titulo" class="form-control"  placeholder= "titulo livro"required>
+                            <input type="text" name="titulo" id="titulo" class="form-control"  placeholder= "titulo livro"required maxlength="200">
                         </div>
                         <div class="mt-3">
                             <label for="ano" class="form-label">Ano</label>
@@ -36,11 +36,11 @@ if (!Auth::isAuthenticated()) {
                         </div> 
                         <div class="mt-3">
                             <label for="genero" class="form-label">Genero</label>
-                            <input type="text" name="genero" id="genero" class="form-control" placeholder= "ficçao,romance,aventura..." required>
+                            <input type="text" name="genero" id="genero" class="form-control" placeholder= "ficçao,romance,aventura..." required maxlength="100">
                         </div> 
                         <div class="mt-3">
                             <label for="isbn" class="form-label">Isbn</label>
-                            <input type="text" name="isbn" id="isbn" class="form-control"  placeholder= "0000000000000  (13 numeros)"required>
+                            <input type="text" name="isbn" id="isbn" class="form-control"  placeholder= "0000000000000  (13 numeros)"required maxlength="13">
                         </div>
                         <div class="mt-3">
                             <label for="autor" class="form-label">Autor</label>

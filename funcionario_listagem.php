@@ -37,9 +37,8 @@ if (!Auth::isAuthenticated()) {
           <tr>
             <th>Id</th>
             <th>Nome</th>
-            <th>Cpf</th>
             <th>Telefone</th>
-
+             <th>Cpf</th>
             <th>Email</th>
             <th>Ações</th>
           </tr>

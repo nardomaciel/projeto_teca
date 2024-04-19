@@ -46,7 +46,7 @@ if(!$funcionario){
                 <form action="funcionario_editar_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control"  value="<?php echo $funcionario->getNome()?>" placeholder="nome funcionario" required>
+                        <input type="text" name="nome" class="form-control"  value="<?php echo $funcionario->getNome()?>" placeholder="nome funcionario" required maxlength="200">
 
                         <label for="telefone" class="form-label">Telefone</label>
                         <input type="text" name="telefone" id="telefone" class="form-control"  value="<?php echo $funcionario->getTelefone()?>" placeholder="(00) 00000-0000" required>
@@ -55,7 +55,7 @@ if(!$funcionario){
                         <input type="text" name="cpf" id="cpf" class="form-control"  value="<?php echo $funcionario->getCpf()?>" placeholder="000.000.000-00" required>
 
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control"  value="<?php echo $funcionario->getEmail()?>" placeholder="name@email.com" required>
+                        <input type="email" name="email" id="email" class="form-control"  value="<?php echo $funcionario->getEmail()?>" placeholder="name@email.com" required maxlength="200">
                         
                         <div class="mb-3">
                             <a href="funcionario_editar_senha.php?id=<?php echo($funcionario->getId());?>" class="btn btn-warning">editar senha</a>

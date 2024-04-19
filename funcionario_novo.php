@@ -33,7 +33,7 @@ if (!Auth::isAuthenticated()) {
                 <form action="funcionario_novo_post.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control" placeholder= "nome funcionario" required>
+                        <input type="text" name="nome" id="nome" class="form-control" placeholder= "nome funcionario" required maxlength="200">
 
                         <label for="cpf" class="form-label">Cpf</label>
                         <input type="text" name="cpf" id="cpf" class="form-control"placeholder= "000.000.000-00" required>
@@ -42,10 +42,10 @@ if (!Auth::isAuthenticated()) {
                         <input type="text" name="telefone" id="telefone" class="form-control"placeholder= "(00) 00000-0000" required>
 
                         <label for="senha" class="form-label">Senha</label>
-                        <input type="senha" name="senha" id="senha" class="form-control"placeholder= "sua senha"required >
+                        <input type="senha" name="senha" id="senha" class="form-control"placeholder= "sua senha"required maxlength="100">
                         
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control"placeholder= "name@email.com" required>
+                        <input type="email" name="email" id="email" class="form-control"placeholder= "name@email.com" required maxlength="200">
                         
                     </div>
                     <div class="mb-3">

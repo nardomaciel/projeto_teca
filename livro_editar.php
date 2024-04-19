@@ -47,13 +47,13 @@ if (!$livro) {
                 <form action="livro_editar_post.php" method="POST">
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Titulo</label>
-                        <input type="text" name="titulo" class="form-control"  value="<?php echo $livro->getTitulo() ?>" required>
+                        <input type="text" name="titulo" class="form-control"  value="<?php echo $livro->getTitulo() ?>" required maxlength="200">
 
                         <label for="ano" class="form-label">Ano de lançamento</label>
-                        <input type="text" name="ano" id="ano" class="form-control"  value="<?php echo $livro->getAno() ?>" required>
+                        <input type="text" name="ano" id="ano" class="form-control"  value="<?php echo $livro->getAno() ?>" required maxlength="100">
 
                         <label for="genero" class="form-label">Genero</label>
-                        <input type="text" name="genero" id="genero" class="form-control"  value="<?php echo $livro->getGenero() ?>" required>
+                        <input type="text" name="genero" id="genero" class="form-control"  value="<?php echo $livro->getGenero() ?>" required maxlength="13"> 
 
                         <label for="autor" class="form-label">id autor</label>
                         <select name="autor_id" id="autor" class="form-select form-select-lg mb-3" aria-label="Large select example" required>
