@@ -6,12 +6,13 @@ $titulo = "Clientes";
 include("include/header.php");
 ?>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
     <h1 class="h3 mb-0">Clientes</h1>
     <a href="cliente_novo.php" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo cliente</a>
 </div>
 
-<div class="tabela-card table-responsive">
+<div class="tabela-card">
+<div class="table-responsive">
     <table class="table table-hover align-middle">
         <thead>
             <tr>
@@ -26,7 +27,11 @@ include("include/header.php");
             </tr>
         </thead>
         <tbody>
-            <?php foreach (ClienteRepository::listAll() as $cliente): ?>
+            <?php $clientes = ClienteRepository::listAll(); ?>
+            <?php if (!$clientes): ?>
+                <tr><td colspan="8" class="vazio"><i class="bi bi-inbox"></i>Nenhum cliente cadastrado ainda.</td></tr>
+            <?php endif; ?>
+            <?php foreach ($clientes as $cliente): ?>
                 <tr>
                     <td><?php echo $cliente->getId(); ?></td>
                     <td><?php echo e($cliente->getNome()); ?></td>
@@ -45,6 +50,7 @@ include("include/header.php");
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
 </div>
 
 <?php include("include/footer.php"); ?>

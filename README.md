@@ -74,3 +74,5 @@ database/                  scripts do banco (MySQL e SQLite)
 **Visual**
 - Bootstrap 5 em todas as páginas (antes misturava a versão 4 e a 5), com mensagens de sucesso e erro depois de cada ação.
 - Página inicial com os números do acervo e os empréstimos vencidos.
+- Modo claro e escuro, seguindo o sistema e com botão para trocar no menu.
+- Funciona no celular: menu recolhível e tabelas que rolam para o lado sem cortar a página.

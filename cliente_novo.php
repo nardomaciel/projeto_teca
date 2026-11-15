@@ -7,7 +7,7 @@ include("include/header.php");
 ?>
 
 <div class="form-card">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <h1 class="h3 mb-0">Novo cliente</h1>
         <a href="cliente_listagem.php" class="btn btn-outline-secondary">Voltar</a>
     </div>

@@ -12,7 +12,7 @@ include("include/header.php");
 ?>
 
 <div class="form-card">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <div>
             <h1 class="h3 mb-0">Trocar senha</h1>
             <p class="text-body-secondary mb-0"><?php echo e($funcionario->getNome()); ?></p>

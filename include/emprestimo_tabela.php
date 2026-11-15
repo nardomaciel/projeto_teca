@@ -8,7 +8,7 @@ $hoje = date('Y-m-d');
     <a href="emprestimo_novo.php" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo empréstimo</a>
 </div>
 
-<ul class="nav nav-pills mb-3 small">
+<ul class="nav nav-pills filtros mb-3 small">
     <?php
     $filtros = [
         'emprestimo_listagem.php' => 'Todos',
@@ -26,9 +26,12 @@ $hoje = date('Y-m-d');
 </ul>
 
 <?php if (!$emprestimos): ?>
-    <div class="alert alert-light border">Nenhum empréstimo nesta lista.</div>
+    <div class="tabela-card">
+        <div class="vazio"><i class="bi bi-inbox"></i>Nenhum empréstimo nesta lista.</div>
+    </div>
 <?php else: ?>
-<div class="tabela-card table-responsive">
+<div class="tabela-card">
+<div class="table-responsive">
     <table class="table table-hover align-middle">
         <thead>
             <tr>
@@ -79,5 +82,6 @@ $hoje = date('Y-m-d');
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
 </div>
 <?php endif; ?>

@@ -12,15 +12,18 @@ $mensagem = $_GET['message'] ?? '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login · biblioTECA</title>
+    <?php include("include/tema.php"); ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
 </head>
-<body class="login-fundo d-flex align-items-center min-vh-100">
+<body class="login-fundo d-flex align-items-center min-vh-100 py-4">
+    <button type="button" class="btn btn-sm btn-outline-light trocar-tema position-absolute top-0 end-0 m-3" aria-label="Trocar entre modo claro e escuro"><i class="bi bi-moon-stars"></i></button>
+
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-sm-9 col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0">
+                <div class="card shadow border-0">
                     <div class="card-body p-4">
                         <h1 class="h3 text-center mb-1"><i class="bi bi-book-half text-primary"></i> biblioTECA</h1>
                         <p class="text-center text-body-secondary mb-4">Entre com o CPF do funcionário</p>
@@ -47,10 +50,6 @@ $mensagem = $_GET['message'] ?? '';
     </main>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/jquery.mask.min.js"></script>
-    <script>
-        $(function () {
-            $('.mask-cpf').mask('000.000.000-00');
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>

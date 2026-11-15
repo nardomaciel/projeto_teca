@@ -6,12 +6,13 @@ $titulo = "Livros";
 include("include/header.php");
 ?>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
     <h1 class="h3 mb-0">Livros</h1>
     <a href="livro_novo.php" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo livro</a>
 </div>
 
-<div class="tabela-card table-responsive">
+<div class="tabela-card">
+<div class="table-responsive">
     <table class="table table-hover align-middle">
         <thead>
             <tr>
@@ -25,7 +26,11 @@ include("include/header.php");
             </tr>
         </thead>
         <tbody>
-            <?php foreach (LivroRepository::listAll() as $livro):
+            <?php $livros = LivroRepository::listAll(); ?>
+            <?php if (!$livros): ?>
+                <tr><td colspan="7" class="vazio"><i class="bi bi-inbox"></i>Nenhum livro cadastrado ainda.</td></tr>
+            <?php endif; ?>
+            <?php foreach ($livros as $livro):
                 $autor = AutorRepository::get($livro->getAutorId()); ?>
                 <tr>
                     <td><?php echo $livro->getId(); ?></td>
@@ -44,6 +49,7 @@ include("include/header.php");
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
 </div>
 
 <?php include("include/footer.php"); ?>

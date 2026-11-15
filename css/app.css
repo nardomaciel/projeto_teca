@@ -1,33 +1,63 @@
-/* Ajustes pequenos por cima do Bootstrap */
+/* Ajustes pequenos por cima do Bootstrap. As cores vêm das variáveis
+   do Bootstrap, então tudo acompanha o modo claro e o escuro. */
 
+/* Barra de rolagem sempre presente: a página não "pula" para o lado
+   ao trocar entre uma tela curta e uma longa. */
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background-color: var(--bs-tertiary-bg);
+}
+
+.card {
+    background-color: var(--bs-body-bg);
+}
+
+/* Cartões de números da página inicial */
 .card-numero {
     border: 1px solid var(--bs-border-color-translucent);
     transition: border-color .15s, box-shadow .15s;
 }
 .card-numero:hover {
     border-color: var(--bs-primary);
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .06);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .08);
 }
 .card-numero .display-6 {
     color: var(--bs-body-color);
 }
 
+/* Tabelas dentro de um cartão. O cartão arredonda as bordas e a div de dentro
+   rola para o lado em tela pequena, sem cortar nada. */
 .tabela-card {
-    background: #fff;
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color-translucent);
     border-radius: var(--bs-border-radius-lg);
-    box-shadow: var(--bs-box-shadow-sm);
     overflow: hidden;
 }
-.tabela-card table {
+.tabela-card .table {
     margin-bottom: 0;
+    --bs-table-bg: transparent;
 }
 .tabela-card thead th {
-    font-size: .8rem;
+    font-size: .78rem;
     text-transform: uppercase;
     letter-spacing: .03em;
     color: var(--bs-secondary-color);
-    background: var(--bs-tertiary-bg);
+    background-color: var(--bs-tertiary-bg);
     white-space: nowrap;
+}
+.tabela-card tbody tr:last-child td {
+    border-bottom: 0;
+}
+.tabela-card th:first-child,
+.tabela-card td:first-child {
+    padding-left: 1rem;
+}
+.tabela-card th:last-child,
+.tabela-card td:last-child {
+    padding-right: 1rem;
 }
 
 .acoes {
@@ -35,8 +65,34 @@
     text-align: right;
 }
 
+/* Aviso de lista vazia */
+.vazio {
+    text-align: center;
+    color: var(--bs-secondary-color);
+    padding: 3rem 1rem !important;
+}
+.vazio i {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: .5rem;
+    opacity: .6;
+}
+
+/* Abas de filtro dos empréstimos: em tela pequena rolam para o lado */
+.filtros {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
 .form-card {
     max-width: 720px;
+}
+
+.rodape {
+    border-top: 1px solid var(--bs-border-color-translucent);
+    background-color: var(--bs-body-bg);
 }
 
 .login-fundo {

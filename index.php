@@ -55,7 +55,7 @@ include("include/header.php");
 </div>
 
 <div class="card border-0 shadow-sm">
-    <div class="card-header bg-white fw-semibold">Empréstimos vencidos</div>
+    <div class="card-header bg-body fw-semibold">Empréstimos vencidos</div>
     <?php if (!$vencidos): ?>
         <div class="card-body text-body-secondary">Nenhum empréstimo vencido. Tudo em dia.</div>
     <?php else: ?>
