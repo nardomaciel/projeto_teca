@@ -1,83 +1,49 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-  header("Location: login.php");
-  exit();
-}
+$titulo = "Livros";
+include("include/header.php");
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIVRO LISTAGEM</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Livros</h1>
+    <a href="livro_novo.php" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo livro</a>
+</div>
 
-</head>
-<style>
-  #titAndButton {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-</style>
-
-<body>
-  <?php include("include/navbar.php") ?>
-  <main>
-    <div class="container">
-      <div id="titAndButton">
-        <h2>LIVRO < LISTAGEM </h2>
-        <td>
-          <a href="livro_novo.php" class="btn btn-success">NOVO LIVRO</a>
-          <a href="index.php" class="btn btn-warning">VOLTAR</a>
-        </td>
-      </div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
+<div class="tabela-card table-responsive">
+    <table class="table table-hover align-middle">
+        <thead>
             <tr>
-              <th>ID</th>
-              <th>Titulo</th>
-              <th>Ano</th>
-              <th>Genero</th>
-              <th>id autor </th>
-              <th>ISBN</th>
-              <th>Ações</th>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Gênero</th>
+                <th>Ano</th>
+                <th>ISBN</th>
+                <th class="acoes">Ações</th>
             </tr>
-          </thead>
-          <tbody>
-            <?php
-            foreach (LivroRepository::listAll() as $livro) {
-            ?>
-              <tr>
-                <td><?php echo $livro->getId(); ?></td>
-                <td><?php echo $livro->getTitulo(); ?></td>
-                <td><?php echo $livro->getAno(); ?></td>
-                <td><?php echo $livro->getGenero(); ?></td>
-                <td><?php echo $livro->getAutorId(); ?></td>
-                <td><?php echo $livro->getIsbn(); ?></td>
-                <div id="titAndButton">
-                  <td>
-                    <a href="livro_editar.php?id=<?php echo $livro->getId(); ?>" type="button" class="btn btn-primary">EDITAR</a>
-                    
-                    <?php if(EmprestimoRepository::countByLivros($livro->getId())== 0){?>
-                    <a href="livro_excluir.php?id=<?php echo $livro->getId();?>" type="button" class="btn btn-danger">DELETAR</a>
-                    <?php } ?>
-                  </td>
-                </div>
-              </tr>
-            <?php
-            }
-            ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
-</body>
+        </thead>
+        <tbody>
+            <?php foreach (LivroRepository::listAll() as $livro):
+                $autor = AutorRepository::get($livro->getAutorId()); ?>
+                <tr>
+                    <td><?php echo $livro->getId(); ?></td>
+                    <td><?php echo e($livro->getTitulo()); ?></td>
+                    <td><?php echo e($autor ? $autor->getNome() : ''); ?></td>
+                    <td><?php echo e($livro->getGenero()); ?></td>
+                    <td><?php echo e($livro->getAno()); ?></td>
+                    <td><?php echo e($livro->getIsbn()); ?></td>
+                    <td class="acoes">
+                        <a href="livro_editar.php?id=<?php echo $livro->getId(); ?>" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <?php if (EmprestimoRepository::countByLivros($livro->getId()) == 0): ?>
+                            <a href="livro_excluir.php?id=<?php echo $livro->getId(); ?>" class="btn btn-sm btn-outline-danger" data-confirmar="Excluir o livro <?php echo e($livro->getTitulo()); ?>?">Excluir</a>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
-</html>
+<?php include("include/footer.php"); ?>

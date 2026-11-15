@@ -1,66 +1,43 @@
 <?php
 include_once("include/factory.php");
-if (!Auth::isAuthenticated()) {
-    header('Location: login.php');
-    exit();
+$user = exigir_login();
+
+$funcionario = FuncionarioRepository::get($_GET["id"] ?? 0);
+if (!$funcionario) {
+    redirecionar("funcionario_listagem.php", "Funcionário não encontrado.", "warning");
 }
-if(!isset($_GET['id'])){
-    header("location: funcionario_listagem.php");
-    exit();
-}
-if($_GET["id"] == "" || $_GET["id"] == NULL){
-    header("location: funcionario_listagem.php");
-    exit();
-}
-$funcionario = FuncionarioRepository::get($_GET["id"]);
-if(!$funcionario){
-    header("location: funcionario_listagem.php");
-    exit();
-}
+
+$titulo = "Trocar senha";
+include("include/header.php");
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>EDITAR FUNCIONARIO</title>
-</head>
-<style>
-    #titAndButton {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-</style>
+<div class="form-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1 class="h3 mb-0">Trocar senha</h1>
+            <p class="text-body-secondary mb-0"><?php echo e($funcionario->getNome()); ?></p>
+        </div>
+        <a href="funcionario_editar.php?id=<?php echo $funcionario->getId(); ?>" class="btn btn-outline-secondary">Voltar</a>
+    </div>
 
-<body>
-    <?php include("include/navbar.php");?>
-    <div class="container">
-
-        <h1>EDITAR SENHA FUNCIONARIO</h1>
-        <a type="button" class="btn btn-warning" href="funcionario_listagem.php">VOLTAR</a>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <form action="funcionario_editar_senha_post.php" method="POST">
-                    <div class="mb-3">
-
-                        <label for="senha" class="form-label" id="senha">Digite a nova senha</label>
-                        <input type="text" name="senha" class="form-control" id="senha" placeholder="nova senha" maxlength="200" >
-
-                        <label for="repSenha" class="form-label" id="repSenha">Confirmar senha</label>
-                        <input type="text" name="repSenha" class="form-control" id="repSenha" placeholder="confirmar senha" maxlength="200">
-
-                    
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" name="id" value="<?php echo $funcionario->getId()?>">
-                        <button type="submit" class="btn btn-info">ENVIAR</button>
-                    </div>
-                </form>
-            </div>
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <form action="funcionario_editar_senha_post.php" method="POST" class="row g-3">
+                <div class="col-md-6">
+                    <label for="senha" class="form-label">Nova senha</label>
+                    <input type="password" name="senha" id="senha" class="form-control" required minlength="6" maxlength="100" autocomplete="new-password" autofocus>
+                </div>
+                <div class="col-md-6">
+                    <label for="repSenha" class="form-label">Confirmar senha</label>
+                    <input type="password" name="repSenha" id="repSenha" class="form-control" required autocomplete="new-password">
+                </div>
+                <div class="col-12">
+                    <input type="hidden" name="id" value="<?php echo $funcionario->getId(); ?>">
+                    <button type="submit" class="btn btn-primary">Salvar nova senha</button>
+                </div>
+            </form>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<?php include("include/footer.php"); ?>

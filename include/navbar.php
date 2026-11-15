@@ -1,84 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php
+$pagina_atual = basename($_SERVER['PHP_SELF']);
+$usuario_logado = Auth::getUser();
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-</head>
-<!-- <style>
-   body{
-    background: black;
-   }
-</style> -->
-<body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">biblioTECA</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+function menu_ativo($prefixo, $pagina_atual){
+    return str_starts_with($pagina_atual, $prefixo) ? 'active' : '';
+}
+?>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand fw-semibold" href="index.php"><i class="bi bi-book-half me-1"></i>biblioTECA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        AUTOR
-                    </a>
+                    <a class="nav-link dropdown-toggle <?php echo menu_ativo('emprestimo', $pagina_atual); ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Empréstimos</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="autor_listagem.php">LISTAGEM</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_novo.php">Novo empréstimo</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem.php">Todos</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem_ativos.php">Ativos</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem_vencidos.php">Vencidos</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem_renovados.php">Renovados</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem_naoRenovados.php">Não renovados</a></li>
+                        <li><a class="dropdown-item" href="emprestimo_listagem_devolvidos.php">Devolvidos</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="cliente_listagem.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        CLIENTE
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="cliente_listagem.php">LISTAGEM</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        EMPRESTIMO
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="emprestimo_listagem.php">LISTAGEM</a>
-                            <a class="dropdown-item" href="emprestimo_listagem_ativos.php">LISTAGEM > ATIVOS</a>
-                            <a class="dropdown-item" href="emprestimo_listagem_vencidos.php">LISTAGEM > VENCIDOS</a>
-                            <a class="dropdown-item" href="emprestimo_listagem_naoRenovados.php">LISTAGEM > RENOVADOS</a>
-                            <a class="dropdown-item" href="emprestimo_listagem_renovados.php">LISTAGEM > NAO RENOVADOS</a>
-                            <a class="dropdown-item" href="emprestimo_listagem_devolvidos.php">LISTAGEM > DEVOLVIDOS</a>
-                    </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="funcionario_listagem.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        FUNCIONARIO
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="funcionario_listagem.php">LISTAGEM</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        LIVRO
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="livro_listagem.php">LISTAGEM</a></li>
-                    </ul>
-                </li>
-
+                <li class="nav-item"><a class="nav-link <?php echo menu_ativo('livro', $pagina_atual); ?>" href="livro_listagem.php">Livros</a></li>
+                <li class="nav-item"><a class="nav-link <?php echo menu_ativo('autor', $pagina_atual); ?>" href="autor_listagem.php">Autores</a></li>
+                <li class="nav-item"><a class="nav-link <?php echo menu_ativo('cliente', $pagina_atual); ?>" href="cliente_listagem.php">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link <?php echo menu_ativo('funcionario', $pagina_atual); ?>" href="funcionario_listagem.php">Funcionários</a></li>
             </ul>
-            <a href="logout.php" class="btn btn-outline-danger">sair</a>
+            <span class="navbar-text me-3 small"><i class="bi bi-person-circle me-1"></i><?php echo e($usuario_logado ? $usuario_logado->getNome() : ''); ?></span>
+            <a href="logout.php" class="btn btn-outline-light btn-sm">Sair</a>
         </div>
     </div>
-
-
 </nav>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-
-</script>
-</body>
-</html>

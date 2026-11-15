@@ -1,39 +1,28 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
+if (campo('nome') == '' || campo('cpf') == '' || campo('email') == '') {
+    redirecionar("funcionario_novo.php", "Preencha nome, CPF e e-mail.", "danger");
 }
 
-$user = Auth::getUser();
-
-if(!isset($_POST['nome'])){
-    header("Location: funcionario_novo.php");
-    exit();
+if (($_POST['senha'] ?? '') == '' || $_POST['senha'] != ($_POST['repSenha'] ?? '')) {
+    redirecionar("funcionario_novo.php", "As senhas estão vazias ou não conferem.", "danger");
 }
-if($_POST["nome"]== '' || $_POST["nome"] == null){
-    header("Location: funcionario_novo.php");
-    exit();
+
+if (FuncionarioRepository::getByCPF(campo('cpf'))) {
+    redirecionar("funcionario_novo.php", "Já existe um funcionário com esse CPF.", "danger");
 }
 
 $funcionario = Factory::funcionario();
-date_default_timezone_set('America/Sao_Paulo');
-
-$funcionario->setNome($_POST['nome']);
-$funcionario->setCpf($_POST['cpf']);
-$funcionario->setTelefone($_POST['telefone']);
+$funcionario->setNome(campo('nome'));
+$funcionario->setCpf(campo('cpf'));
+$funcionario->setTelefone(campo('telefone'));
 $funcionario->setSenha($_POST['senha']);
-$funcionario->setEmail($_POST['email']);
-$funcionario->setInclusaoFuncionarioId($user->getID());
-$funcionario->setDataInclusao(date('Y-d-m H:i:s'));
+$funcionario->setEmail(campo('email'));
+$funcionario->setInclusaoFuncionarioId($user->getId());
+$funcionario->setDataInclusao(date('Y-m-d H:i:s'));
 
-$funcionario_retorno = FuncionarioRepository::insert($funcionario);
+FuncionarioRepository::insert($funcionario);
 
-if($funcionario_retorno > 0){
-    header("Location: funcionario_editar.php?id=errpqp".$funcionario_retorno);
-    exit();
-}
-
-header("Location: funcionario_novo.php");
- exit();
+redirecionar("funcionario_listagem.php", "Funcionário cadastrado.");

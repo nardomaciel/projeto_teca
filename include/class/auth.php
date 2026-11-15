@@ -6,6 +6,7 @@ class Auth{
 
         if($funcionario){
             if($funcionario->checkSenha($senha)){
+                session_regenerate_id(true);
                 $_SESSION['is_authenticated'] = true;
                 $_SESSION['funcionario_id'] = $funcionario->getId();
                 $_SESSION["auth_expired_at"] = time()  + self::$expires_time; //Definindo tempo de expiração da sessão

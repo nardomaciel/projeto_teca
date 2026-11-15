@@ -1,39 +1,24 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
+if (campo('titulo') == '' || campo('autor_id') == '' || campo('ano') == '' || campo('isbn') == '') {
+    redirecionar("livro_novo.php", "Preencha título, autor, ano e ISBN.", "danger");
 }
 
-$user = Auth::getUser();
-
-if(!isset($_POST['titulo'])){
-    header("Location: livro_novo.php");
-    exit();
-}
-if($_POST["titulo"] == '' || $_POST["titulo"] == null){
-    header("Location: livro_novo.php");
-    exit();
+if (!AutorRepository::get(campo('autor_id'))) {
+    redirecionar("livro_novo.php", "Escolha um autor da lista.", "danger");
 }
 
-$livro = Factory::livro(); 
-date_default_timezone_set('America/Sao_Paulo');
+$livro = Factory::livro();
+$livro->setTitulo(campo('titulo'));
+$livro->setAno(campo('ano'));
+$livro->setGenero(campo('genero'));
+$livro->setIsbn(campo('isbn'));
+$livro->setAutorId(campo('autor_id'));
+$livro->setInclusaoFuncionarioId($user->getId());
+$livro->setDataInclusao(date('Y-m-d H:i:s'));
 
-$livro->setTitulo($_POST['titulo']);
-$livro->setAno($_POST['ano']);
-$livro->setGenero($_POST['genero']);
-$livro->setIsbn($_POST['isbn']);
-$livro->setAutorId($_POST['autor']);
-$livro->setinclusaoFuncionarioId($user->getID());
-$livro->setDataInclusao(date('Y-d-m H:i:s'));
+LivroRepository::insert($livro);
 
-$livro_retorno = LivroRepository::insert($livro);
-
-if($livro_retorno > 0){
-    header("Location: livro_editar.php?id=".$livro_retorno);
-    exit();
-}
-
-header("Location: livro_novo.php");
-    exit();
+redirecionar("livro_listagem.php", "Livro cadastrado.");

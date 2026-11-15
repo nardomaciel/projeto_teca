@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
 
 include_once("db.php");
 include_once("class/autor.php");
@@ -14,7 +15,8 @@ include_once("class/repository/cliente.repository.php");
 include_once("class/repository/emprestimo.repository.php");
 include_once("class/repository/livro.repository.php");
 include_once("class/repository/funcionario.repository.php");
-include_once("class/auth.php") ;
+include_once("class/auth.php");
+include_once("helpers.php");
 
 class Factory{
     public static function db(){
@@ -29,9 +31,9 @@ class Factory{
     public static function emprestimo(){
         $emprestimo = new Emprestimo();
         $datetime = new DateTime();
-        $datetime->add(new DateInterval('P7D')); //Adiciona um dia a data atual
-        $emprestimo->setDataVencimento($datetime->format("Y-m-d")); 
-        
+        $datetime->add(new DateInterval('P7D')); // o prazo do empréstimo é de 7 dias
+        $emprestimo->setDataVencimento($datetime->format("Y-m-d"));
+
         return $emprestimo;
     }
     public static function funcionario(){

@@ -52,8 +52,8 @@ class ClienteRepository implements Repository{
         $query = $db->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
-        if ($query->rowCount() > 0){
-            $row = $query->fetch(PDO::FETCH_OBJ);
+        $row = $query->fetch(PDO::FETCH_OBJ);
+            if ($row) {
             $cliente = new Cliente;
             $cliente->setId($row->id);
             $cliente->setNome($row->nome);

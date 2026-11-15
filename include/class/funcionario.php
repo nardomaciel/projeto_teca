@@ -49,9 +49,8 @@ class Funcionario{
         if($is_hashed) {
             $this->senha = $senha;
         } else {
-            $this->senha = hash("sha256",$senha);
+            $this->senha = password_hash($senha, PASSWORD_DEFAULT);
         }
-        
     }
 
 
@@ -94,11 +93,7 @@ class Funcionario{
         $this->alteracao_funcionario_id = $alteracao_funcionario_id;
     }
     public function checkSenha($senha){
-        $senha = hash("sha256",$senha); 
-        if ($senha == $this->senha) {
-            return true;
-        }
-        return false;
+        return password_verify($senha, $this->senha);
     }
 }
 ?>

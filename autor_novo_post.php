@@ -1,34 +1,16 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
-}
-
-$user = Auth::getUser();
-
-if(!isset($_POST['nome'])){
-    header("Location: autor_novo.php");
-    exit();
-}
-if($_POST["nome"] == '' || $_POST["nome"] == null){
-    header("Location: autor_novo.php");
-    exit();
+if (campo('nome') == '') {
+    redirecionar("autor_novo.php", "Informe o nome do autor.", "danger");
 }
 
 $autor = Factory::autor();
-date_default_timezone_set('America/Sao_Paulo');
-$autor->setNome($_POST['nome']);
-$autor->setInclusaoFuncionarioId($user->getID());
-$autor->setDataInclusao(date('Y-d-m H:i:s'));
+$autor->setNome(campo('nome'));
+$autor->setInclusaoFuncionarioId($user->getId());
+$autor->setDataInclusao(date('Y-m-d H:i:s'));
 
-$autor_retorno = AutorRepository::insert($autor);
+AutorRepository::insert($autor);
 
-if($autor_retorno > 0){
-    header("Location: autor_editar.php?4id=".$autor_retorno);
-    exit();
-}
-
-header("Location: autor_novo.php");
- exit();
+redirecionar("autor_listagem.php", "Autor cadastrado.");

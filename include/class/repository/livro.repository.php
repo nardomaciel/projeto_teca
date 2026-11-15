@@ -55,8 +55,8 @@ class LivroRepository implements Repository{
         $query = $db->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
-        if ($query->rowCount() > 0){
-            $row = $query->fetch(PDO::FETCH_OBJ);
+        $row = $query->fetch(PDO::FETCH_OBJ);
+            if ($row) {
             $livro = new Livro;
             $livro->setId($row->id);
             $livro->setTitulo($row->titulo);

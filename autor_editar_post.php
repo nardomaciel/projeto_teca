@@ -1,44 +1,20 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
+$autor = AutorRepository::get($_POST["id"] ?? 0);
+if (!$autor) {
+    redirecionar("autor_listagem.php", "Autor não encontrado.", "warning");
 }
 
-$user = Auth::getUser();
-
-if(!isset($_POST['id'])){
-    header("location: autor_listagem.php");
-    exit();
-}
-if($_POST["id"] == "" || $_POST["id"] == NULL){
-    header("location: autor_listagem.php");
-    exit();
-}
-$autor = AutorRepository::get($_POST["id"]);
-if(!$autor){
-    header("location: autor_listagem.php");
-    exit();
+if (campo('nome') == '') {
+    redirecionar("autor_editar.php?id=" . $autor->getId(), "Informe o nome do autor.", "danger");
 }
 
-if(!isset($_POST['nome'])){
-    header("Location: autor_novo.php?id=".$autor->getId());
-    exit();
-}
-if($_POST["nome" ] == "" || $_POST["nome" == null]){
-    header("Location: autor_novo.php?id=".$autor->getId());
-    exit();
-}
-
-date_default_timezone_set('America/Sao_Paulo');
-
-$autor->setNome($_POST['nome']);
-$autor->setAlteracaoFuncionarioId($user->getID());
-$autor->setDataAlteracao(date('Y-d-m H:i:s'));
+$autor->setNome(campo('nome'));
+$autor->setAlteracaoFuncionarioId($user->getId());
+$autor->setDataAlteracao(date('Y-m-d H:i:s'));
 
 AutorRepository::update($autor);
 
-
-header("location:autor_editar.php?id=".$autor->getId());
- 
+redirecionar("autor_listagem.php", "Autor atualizado.");

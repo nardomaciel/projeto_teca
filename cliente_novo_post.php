@@ -1,44 +1,26 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
+if (campo('nome') == '' || campo('cpf') == '' || campo('email') == '') {
+    redirecionar("cliente_novo.php", "Preencha nome, CPF e e-mail.", "danger");
 }
 
-$user = Auth::getUser();
+$data_nascimento = data_para_banco(campo('data_nascimento'));
+if (!$data_nascimento) {
+    redirecionar("cliente_novo.php", "Data de nascimento inválida. Use dd/mm/aaaa.", "danger");
+}
 
-if(!isset($_POST['nome'])){
-    echo('viado');
-    header("Location: cliente_novo.php");
-    exit();
-}
-if($_POST["nome"] == '' || $_POST["nome" ] == null){
-    echo('vagabunda');
-    header("Location: cliente_novo.php");
-    exit();
-}
-date_default_timezone_set('America/Sao_Paulo');
-$datetime=  DateTime::createFromFormat('d/m/Y', $_POST['data_nascimento']);
-$dateFormatted =  $datetime->format('Y-m-d');
 $cliente = Factory::cliente();
-
-
-$cliente->setNome($_POST['nome']);
-$cliente->setTelefone($_POST['telefone']);
-$cliente->setEmail($_POST['email']);
-$cliente->setCpf($_POST['cpf']);
-$cliente->setRg($_POST['rg']);
-$cliente->setDataNascimento($dateFormatted);
+$cliente->setNome(campo('nome'));
+$cliente->setTelefone(campo('telefone'));
+$cliente->setEmail(campo('email'));
+$cliente->setCpf(campo('cpf'));
+$cliente->setRg(campo('rg'));
+$cliente->setDataNascimento($data_nascimento);
 $cliente->setInclusaoFuncionarioId($user->getId());
-$cliente->setDataInclusao(date('Y-d-m H:i:s'));
+$cliente->setDataInclusao(date('Y-m-d H:i:s'));
 
-$cliente_retorno = ClienteRepository::insert($cliente);
+ClienteRepository::insert($cliente);
 
-if($cliente_retorno > 0){
-    header("Location: cliente_editar.php?id=".$cliente_retorno);
-    exit();
-}
-
-header("Location: cliente_novo.php");
- exit();
+redirecionar("cliente_listagem.php", "Cliente cadastrado.");

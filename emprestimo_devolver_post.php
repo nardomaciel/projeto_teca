@@ -1,38 +1,21 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
-}
-$user = Auth::getUser();
-
-if(!isset($_POST['id'])){
-    header("location: emprestimo_listagem.php");
-    exit();
-}
-if($_POST["id"] == '' || $_POST["id"] == null){
-    header("location: emprestimo_listagem.php");
-    exit();
-}
-$emprestimo = EmprestimoRepository::get($_POST["id"]);
-if(!$emprestimo){
-    header("location: emprestimo_listagem.php");
-    exit();
+$emprestimo = EmprestimoRepository::get($_POST["id"] ?? 0);
+if (!$emprestimo) {
+    redirecionar("emprestimo_listagem.php", "Empréstimo não encontrado.", "warning");
 }
 
-$novo_emprestimo = Factory::emprestimo();
+if ($emprestimo->getDataDevolucao() != null) {
+    redirecionar("emprestimo_listagem.php", "Esse livro já foi devolvido.", "warning");
+}
 
-
-
-date_default_timezone_set('America/Sao_Paulo');
-
-$emprestimo->setDataAlteracao(date('Y-m-d'));
+$emprestimo->setDataAlteracao(date('Y-m-d H:i:s'));
 $emprestimo->setAlteracaoFuncionarioId($user->getId());
 $emprestimo->setDevolucaoFuncionarioId($user->getId());
 $emprestimo->setDataDevolucao(date('Y-m-d H:i:s'));
 
-
 EmprestimoRepository::update($emprestimo);
 
-header("Location: emprestimo_listagem.php");
+redirecionar("emprestimo_listagem_devolvidos.php", "Devolução registrada.");

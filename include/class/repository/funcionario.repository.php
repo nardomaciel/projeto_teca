@@ -14,7 +14,7 @@ class FuncionarioRepository implements Repository{
             $funcionario->setNome($row->nome);
             $funcionario->setCpf($row->cpf);
             $funcionario->setTelefone($row->telefone);
-            $funcionario->setSenha($row->senha);
+            $funcionario->setSenha($row->senha, true);
             $funcionario->setEmail($row->email);
             $funcionario->setDataInclusao($row->data_inclusao);
             $funcionario->setDataAlteracao($row->data_alteracao);
@@ -31,14 +31,14 @@ class FuncionarioRepository implements Repository{
         $query = $db->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
-        if ($query->rowCount() > 0){
-            $row = $query->fetch(PDO::FETCH_OBJ);
+        $row = $query->fetch(PDO::FETCH_OBJ);
+            if ($row) {
             $funcionario = new Funcionario;
             $funcionario->setId($row->id);
             $funcionario->setNome($row->nome);
             $funcionario->setCpf($row->cpf);
             $funcionario->setTelefone($row->telefone);
-            $funcionario->setSenha($row->senha);
+            $funcionario->setSenha($row->senha, true);
             $funcionario->setEmail($row->email);
             $funcionario->setDataInclusao($row->data_inclusao);
             $funcionario->setDataAlteracao($row->data_alteracao);
@@ -56,8 +56,8 @@ class FuncionarioRepository implements Repository{
         $query = $db->prepare($sql);
         $query->bindParam(":cpf", $cpf);
         $query->execute();
-        if ($query->rowCount() > 0){
-            $row = $query->fetch(PDO::FETCH_OBJ);
+        $row = $query->fetch(PDO::FETCH_OBJ);
+            if ($row) {
             $funcionario = new Funcionario;
             $funcionario->setId($row->id);
             $funcionario->setNome($row->nome);
@@ -99,9 +99,10 @@ class FuncionarioRepository implements Repository{
         $query->bindValue(":telefone",$obj->getTelefone());
         $query->bindValue(":senha",$obj->getSenha());
         $query->bindValue(":email",$obj->getEmail());
-        $query->bindValue(":data_alteracao",$obj->getDataAlteracao('Y-m-d'));
-        $query->bindValue(":alteracao_funcionario_id",$obj->getInclusaoFuncionarioId());
-
+        $query->bindValue(":data_alteracao",$obj->getDataAlteracao());
+        $query->bindValue(":alteracao_funcionario_id",$obj->getAlteracaoFuncionarioId());
+        $query->bindValue(":id",$obj->getId());
+        $query->execute();
     }
     public static function delete($id){
         $db = DB::getInstance();

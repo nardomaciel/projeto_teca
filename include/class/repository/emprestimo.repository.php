@@ -163,8 +163,8 @@ class EmprestimoRepository implements Repository{
         $query->bindParam(":id",$id);
         $query->execute();
     
-        if($query->rowCount() > 0){
-            $row = $query->fetch(PDO::FETCH_OBJ);
+        $row = $query->fetch(PDO::FETCH_OBJ);
+            if ($row) {
             $emprestimo = new Emprestimo;
             $emprestimo->setId($row->id);
             $emprestimo->setLivroId($row->livro_id);
@@ -358,18 +358,6 @@ class EmprestimoRepository implements Repository{
         $row = $query->fetch(PDO::FETCH_ASSOC);
         return $row["count(*)"];
     }
-    public static function isMulta($emprestimo_id){
-        $db = DB::getInstance();
-
-        $sql = 'SELECT count(*) FROM emprestimo WHERE data_renovacao IS NOT NULL AND data_vencimento = :';  
-
-        $query = $db->prepare($sql);
-        $query->bindValue(":emprestimo_id",$emprestimo_id);
-        $query->execute();
-
-        $row = $query->fetch(PDO::FETCH_ASSOC);
-        return $row["count(*)"];
-        }
         public static function countByLivrosDevol($livro_id){ // Conta quantos emprestimos existem com o mesmo livro
             $db = DB::getInstance();
     

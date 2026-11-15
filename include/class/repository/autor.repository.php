@@ -26,8 +26,8 @@ class AutorRepository implements Repository{
         $query->bindParam(':id', $id);
         $query->execute();
 
-        if ($query->rowCount() > 0){
-            $row = $query->fetch(PDO::FETCH_OBJ);
+        $row = $query->fetch(PDO::FETCH_OBJ);
+            if ($row) {
             $autor = new Autor;
             $autor->setId($row->id);
             $autor->setNome($row->nome);

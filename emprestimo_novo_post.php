@@ -1,61 +1,32 @@
 <?php
 include_once("include/factory.php");
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("location: login.php");
-    exit();
+$livro_id = campo("livro_id");
+$cliente_id = campo("cliente_id");
+
+if ($livro_id == "" || $cliente_id == "") {
+    redirecionar("emprestimo_novo.php", "Escolha o livro e o cliente.", "danger");
 }
 
-$user = Auth::getUser();
-
-if (!isset($_POST["cliente"])){
-    header("location: emprestimo_novo.php");
-
-    exit();
+if (!LivroRepository::get($livro_id) || !ClienteRepository::get($cliente_id)) {
+    redirecionar("emprestimo_novo.php", "Livro ou cliente não encontrado.", "danger");
 }
 
-if( $_POST["cliente"] == "" || $_POST ["cliente"] == null){
-    header("location: emprestimo_novo.php");
-    
-    exit();
+if (EmprestimoRepository::countByLivroWithNotFinished($livro_id) > 0) {
+    redirecionar("emprestimo_novo.php", "Esse livro já está emprestado.", "danger");
 }
 
-if (!isset($_POST["livro_id"])){
-    header("location: emprestimo_novo.php");
-
-    exit();
-}
-
-if( $_POST["livro_id"] == '' || $_POST ["livro_id"] == null){
-    header("location: emprestimo_novo.php");
-    
-    exit();
-}
-
-
-if(
-    EmprestimoRepository::countByClienteWithNotFinished($_POST["cliente_id"]) > 0
-    ||
-    EmprestimoRepository::countByLivroWithNotFinished($_POST["livro_id"] > 0)
-){
-    header("location: emprestimo_novo.php");
+if (EmprestimoRepository::countByClienteWithNotFinished($cliente_id) > 0) {
+    redirecionar("emprestimo_novo.php", "Esse cliente ainda não devolveu o último livro.", "danger");
 }
 
 $emprestimo = Factory::emprestimo();
-
-date_default_timezone_set('America/Sao_Paulo');
-$emprestimo->setLivroId($_POST["livro_id"]);
-$emprestimo->setClienteId($_POST["cliente"]);
+$emprestimo->setLivroId($livro_id);
+$emprestimo->setClienteId($cliente_id);
 $emprestimo->setInclusaoFuncionarioId($user->getId());
 $emprestimo->setDataInclusao(date("Y-m-d H:i:s"));
 
-$emprestimo_retorno = EmprestimoRepository::insert($emprestimo);
+EmprestimoRepository::insert($emprestimo);
 
-if($emprestimo_retorno > 0){
-    header("location: emprestimo_editar.php?");
-    exit();
-}
-
-header("location: emprestimo_novo.php");
-
-?>
+redirecionar("emprestimo_listagem_ativos.php", "Empréstimo registrado. Devolução até " . $emprestimo->getDataVencimento("d/m/Y") . ".");

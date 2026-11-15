@@ -1,62 +1,34 @@
 <?php
 include_once("include/factory.php");
-if (!Auth::isAuthenticated()) {
-    header('Location: login.php');
-    exit();
+$user = exigir_login();
+
+$autor = AutorRepository::get($_GET["id"] ?? 0);
+if (!$autor) {
+    redirecionar("autor_listagem.php", "Autor não encontrado.", "warning");
 }
-if(!isset($_GET['id'])){
-    header("location: autor_listagem.php");
-    exit();
-}
-if($_GET["id"] == "" || $_GET["id"] == NULL){
-    header("location: autor_listagem.php");
-    exit();
-}
-$autor = AutorRepository::get($_GET["id"]);
-if(!$autor){
-    header("location: autor_listagem.php");
-    exit();
-}
+
+$titulo = "Editar autor";
+include("include/header.php");
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>EDITAR AUTOR</title>
-</head>
-<style>
-    #titAndButton {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-</style>
+<div class="form-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Editar autor</h1>
+        <a href="autor_listagem.php" class="btn btn-outline-secondary">Voltar</a>
+    </div>
 
-<body>
-    <?php include("include/navbar.php"); ?>
-    <div class="container">
-
-        <h1>EDITAR AUTOR</h1>
-        <a type="button" class="btn btn-warning" href="autor_listagem.php">VOLTAR</a>
-        <a type="button" class="btn btn-warning" href="autor_novo.php">NOVO</a>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <form action="autor_editar_post.php" method="POST">
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control" name="id" value="<?php echo $autor->getNome()?>" placeholder="digite o nome do autor">
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" name="id" value="<?php echo $autor->getId()?>">
-                        <button type="submit" class="btn btn-info">ENVIAR</button>
-                    </div>
-                </form>
-            </div>
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <form action="autor_editar_post.php" method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" name="nome" id="nome" class="form-control" value="<?php echo e($autor->getNome()); ?>" required maxlength="200">
+                </div>
+                <input type="hidden" name="id" value="<?php echo $autor->getId(); ?>">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
         </div>
     </div>
-</body>
+</div>
 
-</html>
+<?php include("include/footer.php"); ?>

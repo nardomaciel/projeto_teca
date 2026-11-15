@@ -1,41 +1,19 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
-}
-
-$user = Auth::getUser();
-
-if(!isset($_GET['id'])){
-    header("location: emprestimo_listagem.php");
-    exit();
-}
-if($_GET["id"] == "" || $_GET["id"] == null){
-    header("location: emprestimo_listagem.php");
-    exit();
-}
-$emprestimo = EmprestimoRepository::get($_GET["id"]);
-if(!$emprestimo){
-    header("location: emprestimo_listagem.php");
-    exit();
+$emprestimo = EmprestimoRepository::get($_GET["id"] ?? 0);
+if (!$emprestimo) {
+    redirecionar("emprestimo_listagem.php", "Empréstimo não encontrado.", "warning");
 }
 
-if(EmprestimoRepository::countByDataDevolucao($_GET["id"]) > 0){
-    header("location: emprestimo_listagem.php");
-    exit(); 
+// Excluir serve só para corrigir um lançamento errado, antes de qualquer movimento.
+if ($emprestimo->getDataDevolucao() != null
+    || $emprestimo->getDataRenovacao() != null
+    || $emprestimo->getDataAlteracao() != null) {
+    redirecionar("emprestimo_listagem.php", "Só dá para excluir um empréstimo que ainda não teve renovação nem devolução.", "danger");
 }
-if(EmprestimoRepository::countByDataRenovacao($_GET["id"]) > 0){
-    header("location: emprestimo_listagem.php");
-    exit(); 
-}
-if(EmprestimoRepository::countByDataAlteracao($_GET["id"]) > 0){
-    header("location: emprestimo_listagem.php");
-    exit(); 
-}
-
 
 EmprestimoRepository::delete($emprestimo->getId());
 
-header("Location: emprestimo_listagem.php");
+redirecionar("emprestimo_listagem.php", "Empréstimo excluído.");

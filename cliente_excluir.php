@@ -1,27 +1,16 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
+$cliente = ClienteRepository::get($_GET["id"] ?? 0);
+if (!$cliente) {
+    redirecionar("cliente_listagem.php", "Cliente não encontrado.", "warning");
 }
 
-$user = Auth::getUser();
-
-if(!isset($_GET['id'])){
-    header("location: cliente_listagem.ph");
-    exit();
+if (EmprestimoRepository::countByClientes($cliente->getId()) > 0) {
+    redirecionar("cliente_listagem.php", "Esse cliente tem empréstimos registrados e não pode ser excluído.", "danger");
 }
-if($_GET["id"] == '' || $_GET["id"] == NULL){
-    header("location: cliente_listagem.php");
-    exit();
-}
-$cliente = ClienteRepository::get($_GET["id"]);
-if(!$cliente){
-    header("location: cliente_listagem.php");
-    exit();
-}
-
 
 ClienteRepository::delete($cliente->getId());
-header("location:cliente_listagem.php");
+
+redirecionar("cliente_listagem.php", "Cliente excluído.");

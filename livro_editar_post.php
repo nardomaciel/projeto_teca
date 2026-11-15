@@ -1,50 +1,30 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
+$livro = LivroRepository::get($_POST["id"] ?? 0);
+if (!$livro) {
+    redirecionar("livro_listagem.php", "Livro não encontrado.", "warning");
 }
 
-$user = Auth::getUser();
+$voltar = "livro_editar.php?id=" . $livro->getId();
 
-if(!isset($_POST['id'])){
-    header("location:livro_listagem.php");
-    exit();
-}
-if($_POST["id"] == "" || $_POST["id"] == NULL){
-    header("location: livro_listagem.php");
-    exit();
-}
-$livro = LivroRepository::get($_POST["id"]);
-if(!$livro){
-    header("location: livro_listagem.php");
-    exit();
+if (campo('titulo') == '' || campo('autor_id') == '' || campo('ano') == '' || campo('isbn') == '') {
+    redirecionar($voltar, "Preencha título, autor, ano e ISBN.", "danger");
 }
 
-if(!isset($_POST['titulo'])){
-    header("Location: livro_editar.php?id=".$livro->getId()."90");
-    exit();
-}
-if($_POST["titulo" ] == '' || $_POST["titulo"] == null){
-    header("Location: livro_editar.php?id=".$livro->getId()."sdgsdg");
-    exit();
+if (!AutorRepository::get(campo('autor_id'))) {
+    redirecionar($voltar, "Escolha um autor da lista.", "danger");
 }
 
-
-
-date_default_timezone_set('America/Sao_Paulo');
-
-$livro->setTitulo($_POST['titulo']);
-$livro->setAno($_POST['ano']);
-$livro->setGenero($_POST['genero']);
-$livro->setAutorId($_POST['autor_id']);
-$livro->setIsbn($_POST['isbn']);
+$livro->setTitulo(campo('titulo'));
+$livro->setAno(campo('ano'));
+$livro->setGenero(campo('genero'));
+$livro->setAutorId(campo('autor_id'));
+$livro->setIsbn(campo('isbn'));
 $livro->setAlteracaoFuncionarioId($user->getId());
-$livro->setDataAlteracao(date('Y-d-m H:i:s'));
+$livro->setDataAlteracao(date('Y-m-d H:i:s'));
 
 LivroRepository::update($livro);
 
-
-header("location:livro_editar.php?id=".$livro->getId()."ultimo");
- 
+redirecionar("livro_listagem.php", "Livro atualizado.");

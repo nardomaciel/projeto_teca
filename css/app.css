@@ -1,0 +1,44 @@
+/* Ajustes pequenos por cima do Bootstrap */
+
+.card-numero {
+    border: 1px solid var(--bs-border-color-translucent);
+    transition: border-color .15s, box-shadow .15s;
+}
+.card-numero:hover {
+    border-color: var(--bs-primary);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .06);
+}
+.card-numero .display-6 {
+    color: var(--bs-body-color);
+}
+
+.tabela-card {
+    background: #fff;
+    border-radius: var(--bs-border-radius-lg);
+    box-shadow: var(--bs-box-shadow-sm);
+    overflow: hidden;
+}
+.tabela-card table {
+    margin-bottom: 0;
+}
+.tabela-card thead th {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--bs-secondary-color);
+    background: var(--bs-tertiary-bg);
+    white-space: nowrap;
+}
+
+.acoes {
+    white-space: nowrap;
+    text-align: right;
+}
+
+.form-card {
+    max-width: 720px;
+}
+
+.login-fundo {
+    background: linear-gradient(135deg, #1f2937 0%, #3b4a6b 100%);
+}

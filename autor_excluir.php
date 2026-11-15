@@ -1,30 +1,16 @@
 <?php
 include_once('include/factory.php');
+$user = exigir_login();
 
-if (!Auth::isAuthenticated()) {
-    header("Location: login.php");
-    exit();
-}
-
-$user = Auth::getUser();
-
-if(!isset($_GET['id'])){
-    header("location: autor_listagem.php");
-    exit();
-}
-if($_GET["id"] == '' || $_GET["id"] == NULL){
-    header("location: autor_listagem.php");
-    exit();
-}
-$autor = AutorRepository::get($_GET["id"]);
-if(!$autor){
-    header("location: autor_listagem.php");
-    exit();
+$autor = AutorRepository::get($_GET["id"] ?? 0);
+if (!$autor) {
+    redirecionar("autor_listagem.php", "Autor não encontrado.", "warning");
 }
 
-if(LivroRepository::countByAutor($autor->getId()) > 0){
-    header("location: autor_listagem.php");
-    exit();
+if (LivroRepository::countByAutor($autor->getId()) > 0) {
+    redirecionar("autor_listagem.php", "Esse autor tem livros cadastrados e não pode ser excluído.", "danger");
 }
+
 AutorRepository::delete($autor->getId());
-header("location:autor_listagem.php");
+
+redirecionar("autor_listagem.php", "Autor excluído.");
