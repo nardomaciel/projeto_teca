@@ -27,20 +27,60 @@ Uma estante de madeira com as lombadas dos livros, separados por gênero em prat
 - Ver os empréstimos separados por situação. Os feitos pela biblioteca online aparecem marcados
 - Cada cadastro guarda quem incluiu e quem alterou
 
-## Como rodar
+## Como rodar localmente
 
-Precisa de PHP 8 com a extensão `pdo_sqlite` (já vem ligada no XAMPP e no Laragon).
+Não precisa instalar banco de dados nem nada além do PHP. Por padrão o sistema usa SQLite: na primeira vez que abrir, ele cria o banco sozinho em `database/teca.sqlite`, já com 217 livros de 9 gêneros, alguns clientes e empréstimos de exemplo.
+
+### 1. Baixe o projeto
+
+```bash
+git clone https://github.com/nardomaciel/projeto_teca.git
+cd projeto_teca
+```
+
+Ou baixe o ZIP pelo botão **Code > Download ZIP** e extraia.
+
+### 2. Escolha um jeito de rodar
+
+**Opção A: só com o PHP (o mais rápido)**
+
+Precisa do PHP 8 ou mais novo. Confira com `php -v`. Dentro da pasta do projeto, rode:
 
 ```bash
 php -S localhost:8000
 ```
 
-- **Biblioteca online:** http://localhost:8000/biblioteca.php. Para pegar um livro, use o código `CAR8P3` (cliente de exemplo).
-- **Área do funcionário:** http://localhost:8000, com CPF `123.456.789-09` e senha `biblioteca`.
+Deixe o terminal aberto enquanto usa o sistema. Para parar, aperte `Ctrl + C`.
 
-Na primeira vez, o banco é criado sozinho em `database/teca.sqlite`, já com 217 livros de 9 gêneros, alguns clientes e empréstimos de exemplo. Os ISBNs dos livros de exemplo são fictícios.
+**Opção B: com XAMPP ou Laragon**
 
-**Com MySQL:** importe `database/projeto_teca.sql` no phpMyAdmin e troque `'driver' => 'sqlite'` por `'driver' => 'mysql'` em `include/config.php`.
+1. Copie a pasta `projeto_teca` para dentro de `htdocs` (XAMPP) ou `www` (Laragon).
+2. Inicie o Apache pelo painel.
+3. Acesse http://localhost/projeto_teca.
+
+### 3. Abra no navegador
+
+| O quê | Endereço (opção A) | Como entrar |
+|---|---|---|
+| Biblioteca online | http://localhost:8000/biblioteca.php | Escolha um livro e use o código `CAR8P3` |
+| Área do funcionário | http://localhost:8000 | CPF `123.456.789-09`, senha `biblioteca` |
+
+Na opção B, troque `localhost:8000` por `localhost/projeto_teca`.
+
+Outros códigos de exemplo: `ANA7K2` e `BRU4M9` (já estão com um livro) e `DIE5R6`.
+
+### Usar MySQL em vez de SQLite (opcional)
+
+1. No phpMyAdmin, vá em **Importar** e envie o arquivo `database/projeto_teca.sql`. Ele cria o banco `projeto_teca` com os mesmos dados de exemplo.
+2. Em `include/config.php`, troque `'driver' => 'sqlite'` por `'driver' => 'mysql'` e ajuste usuário e senha se o seu MySQL não for `root` sem senha.
+
+### Problemas comuns
+
+- **"could not find driver"**: a extensão do banco está desligada no PHP. Abra o `php.ini` (o caminho aparece em `php --ini`), tire o `;` da frente de `extension=pdo_sqlite` (ou `extension=pdo_mysql`, se usar MySQL) e reinicie.
+- **Quero começar do zero**: apague o arquivo `database/teca.sqlite`. Ele é recriado com os dados de exemplo na próxima vez que você abrir o sistema.
+- **A página abriu sem estilo**: o Bootstrap e os ícones vêm da internet (CDN), então é preciso estar conectado.
+
+Os ISBNs dos livros de exemplo são fictícios.
 
 ## Tecnologias
 
