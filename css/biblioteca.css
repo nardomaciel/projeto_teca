@@ -1,0 +1,327 @@
+/* Biblioteca online: estante de madeira com as lombadas dos livros.
+   Funciona nos modos claro e escuro do Bootstrap. */
+
+.biblioteca {
+    --papel: #f4efe6;
+    --tinta: #2b2118;
+    --madeira: #6b4226;
+    --madeira-clara: #8a5a36;
+    --madeira-escura: #3a2213;
+    --fundo-estante: #2e2017;
+    --latao: #d9b56a;
+    --latao-escuro: #a8823c;
+    --creme: #f3e9d2;
+
+    background-color: var(--papel);
+    color: var(--tinta);
+}
+
+[data-bs-theme="dark"] .biblioteca {
+    --papel: #16120e;
+    --tinta: #e9e1d3;
+    --fundo-estante: #120c08;
+}
+
+.biblioteca h1,
+.biblioteca h2,
+.marca,
+.capa {
+    font-family: "Libre Baskerville", Georgia, serif;
+}
+
+/* Topo */
+.topo-biblioteca {
+    background:
+        radial-gradient(ellipse at 20% 0%, rgba(217, 181, 106, .18), transparent 60%),
+        linear-gradient(180deg, #2b1d14 0%, #3d2a1c 100%);
+    color: var(--creme);
+    padding-bottom: 2.5rem;
+}
+.marca {
+    color: var(--creme);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.marca i {
+    color: var(--latao);
+}
+.chamada {
+    max-width: 640px;
+    padding-top: 1.5rem;
+}
+.chamada h1 {
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    margin-bottom: .75rem;
+}
+.chamada p {
+    color: rgba(243, 233, 210, .82);
+    margin-bottom: .5rem;
+}
+.chamada .contagem strong {
+    color: var(--latao);
+    font-size: 1.15em;
+}
+
+/* Barra de busca e gêneros, gruda no topo ao rolar */
+.barra-filtros {
+    background-color: color-mix(in srgb, var(--papel) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(107, 66, 38, .18);
+    z-index: 1010;
+}
+.busca {
+    position: relative;
+    min-width: 220px;
+}
+.busca i {
+    position: absolute;
+    left: .8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bs-secondary-color);
+}
+.busca .form-control {
+    padding-left: 2.2rem;
+    border-radius: 2rem;
+}
+.generos {
+    display: flex;
+    gap: .4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: .1rem;
+}
+.genero {
+    flex: none;
+    font-size: .82rem;
+    padding: .2rem .75rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(107, 66, 38, .35);
+    color: var(--tinta);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.genero span {
+    opacity: .55;
+    margin-left: .15rem;
+}
+.genero:hover {
+    background-color: var(--madeira);
+    border-color: var(--madeira);
+    color: var(--creme);
+}
+
+/* Prateleiras lado a lado: as pequenas dividem a linha, as grandes ocupam a largura toda */
+.estantes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem 1.5rem;
+}
+
+/* Prateleira de cada gênero */
+.prateleira {
+    flex: 1 1 auto;
+    min-width: min(100%, 260px);
+    scroll-margin-top: 130px;
+}
+
+.codigo::placeholder {
+    text-transform: none;
+}
+.placa {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin: 0 0 -.6rem 1.75rem;
+    padding: .3rem 1rem;
+    font-size: .95rem;
+    color: #3a2a10;
+    background: linear-gradient(180deg, var(--latao) 0%, var(--latao-escuro) 100%);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .45);
+}
+
+/* A estante: fundo escuro, laterais de madeira e uma tábua embaixo de cada fileira.
+   Cada fileira tem 200px de livros + 18px de tábua; o fundo repete nesse ritmo. */
+.estante {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 18px 3px;
+    padding: 18px 16px;
+    border: 14px solid var(--madeira);
+    border-top-width: 16px;
+    border-bottom-width: 0;
+    border-radius: 6px 6px 0 0;
+    background-color: var(--fundo-estante);
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 200px,
+        var(--madeira-clara) 200px 203px,
+        var(--madeira) 203px 214px,
+        var(--madeira-escura) 214px 218px
+    );
+    background-position: 0 18px;
+    background-origin: padding-box;
+    box-shadow:
+        inset 0 18px 30px -12px rgba(0, 0, 0, .7),
+        0 10px 20px -10px rgba(0, 0, 0, .5);
+    border-left-color: var(--madeira-escura);
+    border-right-color: var(--madeira-escura);
+}
+
+.vao {
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* Lombada de um livro */
+.livro {
+    --cor: #7a2e1d;
+    position: relative;
+    width: var(--largura, 38px);
+    height: var(--altura, 170px);
+    padding: 26px 0 30px;
+    border: 0;
+    border-radius: 3px 3px 1px 1px;
+    color: rgba(255, 255, 255, .93);
+    background:
+        linear-gradient(90deg,
+            rgba(0, 0, 0, .28) 0%,
+            rgba(255, 255, 255, .14) 16%,
+            rgba(255, 255, 255, 0) 42%,
+            rgba(0, 0, 0, .08) 70%,
+            rgba(0, 0, 0, .3) 100%),
+        var(--cor);
+    box-shadow: 2px 0 2px rgba(0, 0, 0, .35);
+    cursor: pointer;
+    transition: transform .18s ease, filter .18s ease;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+/* Frisos dourados perto do topo e da base */
+.livro::before,
+.livro::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    height: 2px;
+    background: rgba(232, 200, 120, .7);
+    box-shadow: 0 4px 0 rgba(232, 200, 120, .35);
+}
+.livro::before {
+    top: 12px;
+}
+.livro::after {
+    bottom: 16px;
+}
+.livro .titulo {
+    writing-mode: vertical-rl;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 12px;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 100%;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+}
+.livro .autor {
+    display: none;
+}
+.livro:hover,
+.livro:focus-visible {
+    transform: translateY(-12px);
+    filter: brightness(1.12);
+    outline: none;
+}
+.livro:focus-visible {
+    box-shadow: 0 0 0 3px var(--latao);
+}
+
+/* Livro emprestado: mais apagado e com um papelzinho saindo por cima */
+.livro.emprestado {
+    filter: saturate(.3) brightness(.7);
+    overflow: visible;
+}
+.livro.emprestado:hover {
+    filter: saturate(.5) brightness(.85);
+}
+.livro.emprestado .titulo {
+    opacity: .75;
+}
+.livro.emprestado::after {
+    bottom: auto;
+    top: -9px;
+    left: 50%;
+    right: auto;
+    width: 9px;
+    height: 24px;
+    margin-left: -4px;
+    background: #efe6d3;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+    border-radius: 1px;
+}
+
+/* Capa no modal de detalhe */
+.capa {
+    --cor: #7a2e1d;
+    height: 100%;
+    min-height: 320px;
+    padding: 2.25rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--creme);
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, .35) 0, rgba(0, 0, 0, .1) 14px, rgba(255, 255, 255, .08) 16px, transparent 40%),
+        var(--cor);
+    border-radius: var(--bs-modal-inner-border-radius) 0 0 var(--bs-modal-inner-border-radius);
+}
+.capa-genero {
+    font-size: .75rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .75;
+}
+.capa-titulo {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    padding: 1rem 0;
+    border-top: 2px solid rgba(232, 200, 120, .7);
+    border-bottom: 2px solid rgba(232, 200, 120, .7);
+}
+.capa-autor {
+    font-style: italic;
+    opacity: .9;
+}
+.m-sinopse {
+    line-height: 1.6;
+}
+
+/* Rodapé */
+.rodape-biblioteca {
+    background-color: #2b1d14;
+    color: rgba(243, 233, 210, .75);
+}
+.rodape-biblioteca a {
+    color: var(--latao);
+}
+
+@media (max-width: 767.98px) {
+    .capa {
+        min-height: 200px;
+        border-radius: var(--bs-modal-inner-border-radius) var(--bs-modal-inner-border-radius) 0 0;
+    }
+    .estante {
+        padding: 18px 10px;
+        border-width: 10px;
+        border-top-width: 12px;
+        border-bottom-width: 0;
+    }
+}

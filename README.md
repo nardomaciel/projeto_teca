@@ -6,13 +6,26 @@ Foi um dos meus primeiros sistemas completos, escrito em PHP puro, sem framework
 
 Um tempo depois voltei nele para um remaster: a estrutura e a lógica são as mesmas que eu escrevi na época, mas corrigi os bugs, dei uma limpada no código e troquei o visual para Bootstrap 5, para quem abrir encontrar um sistema funcionando de verdade.
 
-## O que dá pra fazer
+O sistema tem duas partes: a área do funcionário, onde a biblioteca é administrada, e a biblioteca online, aberta ao público.
 
-- Cadastrar livros, autores, clientes e funcionários
+## Biblioteca online
+
+Uma estante de madeira com as lombadas dos livros, separados por gênero em prateleiras. A pessoa clica num livro, lê a sinopse e, se ele estiver na estante, digita o código de acesso que recebeu no cadastro. O empréstimo sai na hora, no nome dela, por 7 dias.
+
+- Busca por título ou autor e filtro de só disponíveis
+- Livros emprestados aparecem apagados, com a data em que voltam
+- "Meu empréstimo": com o código, a pessoa vê qual livro está com ela e até quando
+- Depois de 5 códigos errados seguidos, a tentativa fica bloqueada por alguns minutos
+
+## Área do funcionário
+
+- Cadastrar livros (com sinopse e cor da lombada), autores, clientes e funcionários
+- Cadastrar vários livros de uma vez, colando uma lista. Autores novos são criados junto
+- Gerar e trocar o código de acesso de cada cliente
 - Registrar empréstimos com prazo de 7 dias, renovar uma vez e dar baixa na devolução
 - Ver a multa por atraso na hora da devolução (R$ 1,00 por dia)
-- Ver os empréstimos separados por situação: ativos, vencidos, renovados, não renovados e devolvidos
-- Entrar com login de funcionário. Cada cadastro guarda quem incluiu e quem alterou
+- Ver os empréstimos separados por situação. Os feitos pela biblioteca online aparecem marcados
+- Cada cadastro guarda quem incluiu e quem alterou
 
 ## Como rodar
 
@@ -22,12 +35,10 @@ Precisa de PHP 8 com a extensão `pdo_sqlite` (já vem ligada no XAMPP e no Lara
 php -S localhost:8000
 ```
 
-Abra http://localhost:8000 e entre com:
+- **Biblioteca online:** http://localhost:8000/biblioteca.php. Para pegar um livro, use o código `CAR8P3` (cliente de exemplo).
+- **Área do funcionário:** http://localhost:8000, com CPF `123.456.789-09` e senha `biblioteca`.
 
-- **CPF:** 123.456.789-09
-- **Senha:** biblioteca
-
-Na primeira vez, o banco é criado sozinho em `database/teca.sqlite`, já com alguns livros, clientes e empréstimos de exemplo.
+Na primeira vez, o banco é criado sozinho em `database/teca.sqlite`, já com 217 livros de 9 gêneros, alguns clientes e empréstimos de exemplo. Os ISBNs dos livros de exemplo são fictícios.
 
 **Com MySQL:** importe `database/projeto_teca.sql` no phpMyAdmin e troque `'driver' => 'sqlite'` por `'driver' => 'mysql'` em `include/config.php`.
 
@@ -43,6 +54,8 @@ include/class/repository/  acesso ao banco de cada entidade
 include/header.php, footer.php, navbar.php   partes comuns das páginas
 *_listagem.php, *_novo.php, *_editar.php, *_excluir.php   telas de cada cadastro
 *_post.php                 recebem os formulários
+biblioteca*.php            a biblioteca online (estante, empréstimo e consulta)
+css/biblioteca.css         o visual da estante
 database/                  scripts do banco (MySQL e SQLite)
 ```
 

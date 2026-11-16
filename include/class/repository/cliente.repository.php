@@ -14,6 +14,7 @@ class ClienteRepository implements Repository{
             $cliente->setEmail($row->email);
             $cliente->setCpf($row->cpf);
             $cliente->setRg($row->rg);
+            $cliente->setCodigoAcesso($row->codigo_acesso);
             $cliente->setDataNascimento($row->data_nascimento); 
             $cliente->setDataInclusao($row->data_inclusao);
             $cliente->setDataAlteracao($row->data_alteracao);
@@ -37,6 +38,7 @@ class ClienteRepository implements Repository{
             $cliente->setEmail($row->email);
             $cliente->setCpf($row->cpf);
             $cliente->setRg($row->rg);
+            $cliente->setCodigoAcesso($row->codigo_acesso);
             $cliente->setDataNascimento($row->data_nascimento); 
             $cliente->setDataInclusao($row->data_inclusao);
             $cliente->setDataAlteracao($row->data_alteracao);
@@ -61,6 +63,7 @@ class ClienteRepository implements Repository{
             $cliente->setEmail($row->email);
             $cliente->setCpf($row->cpf);
             $cliente->setRg($row->rg);
+            $cliente->setCodigoAcesso($row->codigo_acesso);
             $cliente->setDataNascimento($row->data_nascimento); 
             $cliente->setDataInclusao($row->data_inclusao);
             $cliente->setDataAlteracao($row->data_alteracao);
@@ -72,7 +75,7 @@ class ClienteRepository implements Repository{
     }
     public static function insert($obj){
         $db = DB::getInstance();
-        $sql = "INSERT INTO cliente (nome, telefone, email, cpf, rg, data_nascimento, data_inclusao, inclusao_funcionario_id) VALUES (:nome, :telefone, :email, :cpf, :rg, :data_nascimento, :data_inclusao, :inclusao_funcionario_id)";
+        $sql = "INSERT INTO cliente (nome, telefone, email, cpf, rg, codigo_acesso, data_nascimento, data_inclusao, inclusao_funcionario_id) VALUES (:nome, :telefone, :email, :cpf, :rg, :codigo_acesso, :data_nascimento, :data_inclusao, :inclusao_funcionario_id)";
 
         $query = $db->prepare($sql);
         $query->bindValue(":nome",$obj->getNome());
@@ -80,6 +83,7 @@ class ClienteRepository implements Repository{
         $query->bindValue(":email",$obj->getEmail());
         $query->bindValue(":cpf",$obj->getCpf());
         $query->bindValue(":rg",$obj->getRg());
+        $query->bindValue(":codigo_acesso",$obj->getCodigoAcesso());
         $query->bindValue(":data_nascimento",$obj->getDataNascimento());
         $query->bindValue(":data_inclusao",$obj->getDataInclusao());
         $query->bindValue(":inclusao_funcionario_id",$obj->getInclusaoFuncionarioId());
@@ -91,7 +95,7 @@ class ClienteRepository implements Repository{
     }
     public static function update($obj){
         $db = DB::getInstance();
-        $sql = "UPDATE cliente SET nome = :nome, telefone = :telefone, email= :email, cpf = :cpf, rg = :rg, data_nascimento = :data_nascimento, data_alteracao = :data_alteracao, alteracao_funcionario_id = :alteracao_funcionario_id WHERE id = :id";
+        $sql = "UPDATE cliente SET nome = :nome, telefone = :telefone, email= :email, cpf = :cpf, rg = :rg, codigo_acesso = :codigo_acesso, data_nascimento = :data_nascimento, data_alteracao = :data_alteracao, alteracao_funcionario_id = :alteracao_funcionario_id WHERE id = :id";
 
         $query = $db->prepare($sql);//prepara a query para ser executada.
         $query->bindValue(':id', $obj->getId(),);
@@ -100,6 +104,7 @@ class ClienteRepository implements Repository{
         $query->bindValue(':email' ,$obj->getEmail());
         $query->bindValue(':cpf' ,$obj->getCpf());
         $query->bindValue(':rg' ,$obj->getRg());
+        $query->bindValue(':codigo_acesso' ,$obj->getCodigoAcesso());
         $query->bindValue(':data_nascimento' ,$obj->getDataNascimento());
         $query->bindValue(':data_alteracao', $obj->getDataAlteracao());
         $query->bindValue(':alteracao_funcionario_id', $obj->getAlteracaoFuncionarioId());
@@ -146,6 +151,16 @@ public static function countByAlteracaoFuncionario($alteracao_funcionario_id){
 
     $row = $query->fetch(PDO::FETCH_ASSOC);
     return $row["count(*)"];
+    }
+    // Busca o cliente pelo código que o admin passou para ele usar na biblioteca online.
+    public static function getByCodigo($codigo){
+        $db = DB::getInstance();
+        $sql = "SELECT id FROM cliente WHERE codigo_acesso = :codigo";
+        $query = $db->prepare($sql);
+        $query->bindValue(":codigo", strtoupper(trim($codigo)));
+        $query->execute();
+        $row = $query->fetch(PDO::FETCH_OBJ);
+        return $row ? self::get($row->id) : null;
     }
 }
 ?>

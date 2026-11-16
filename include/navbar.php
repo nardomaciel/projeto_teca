@@ -44,6 +44,7 @@ $listas_emprestimo = [
                 <li class="nav-item"><a class="nav-link <?php echo menu_ativo('funcionario', $pagina_atual); ?>" href="funcionario_listagem.php">Funcionários</a></li>
             </ul>
             <div class="d-flex align-items-center gap-2 pb-2 pb-lg-0">
+                <a href="biblioteca.php" target="_blank" class="btn btn-sm btn-outline-warning" title="Abre a área pública numa nova aba"><i class="bi bi-bookshelf me-1"></i>Biblioteca online</a>
                 <span class="navbar-text small me-auto me-lg-2"><i class="bi bi-person-circle me-1"></i><?php echo e($usuario_logado ? $usuario_logado->getNome() : ''); ?></span>
                 <button type="button" class="btn btn-sm btn-outline-light trocar-tema" title="Trocar tema" aria-label="Trocar entre modo claro e escuro"><i class="bi bi-moon-stars"></i></button>
                 <a href="logout.php" class="btn btn-sm btn-outline-light">Sair</a>

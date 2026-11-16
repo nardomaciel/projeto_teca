@@ -8,7 +8,10 @@ include("include/header.php");
 
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
     <h1 class="h3 mb-0">Livros</h1>
-    <a href="livro_novo.php" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo livro</a>
+    <div class="d-flex gap-2">
+        <a href="livro_lote.php" class="btn btn-outline-primary"><i class="bi bi-list-ul me-1"></i>Cadastrar em lote</a>
+        <a href="livro_novo.php" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo livro</a>
+    </div>
 </div>
 
 <div class="tabela-card">
@@ -34,7 +37,7 @@ include("include/header.php");
                 $autor = AutorRepository::get($livro->getAutorId()); ?>
                 <tr>
                     <td><?php echo $livro->getId(); ?></td>
-                    <td><?php echo e($livro->getTitulo()); ?></td>
+                    <td><span class="lombada-mini" style="background: <?php echo cor_lombada($livro->getId(), $livro->getCor()); ?>"></span><?php echo e($livro->getTitulo()); ?></td>
                     <td><?php echo e($autor ? $autor->getNome() : ''); ?></td>
                     <td><?php echo e($livro->getGenero()); ?></td>
                     <td><?php echo e($livro->getAno()); ?></td>

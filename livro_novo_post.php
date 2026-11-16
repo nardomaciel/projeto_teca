@@ -15,6 +15,8 @@ $livro->setTitulo(campo('titulo'));
 $livro->setAno(campo('ano'));
 $livro->setGenero(campo('genero'));
 $livro->setIsbn(campo('isbn'));
+$livro->setSinopse(campo('sinopse'));
+$livro->setCor(preg_match('/^#[0-9a-fA-F]{6}$/', campo('cor')) ? campo('cor') : null);
 $livro->setAutorId(campo('autor_id'));
 $livro->setInclusaoFuncionarioId($user->getId());
 $livro->setDataInclusao(date('Y-m-d H:i:s'));

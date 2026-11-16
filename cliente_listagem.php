@@ -23,13 +23,14 @@ include("include/header.php");
                 <th>CPF</th>
                 <th>RG</th>
                 <th>Nascimento</th>
+                <th>Código de acesso</th>
                 <th class="acoes">Ações</th>
             </tr>
         </thead>
         <tbody>
             <?php $clientes = ClienteRepository::listAll(); ?>
             <?php if (!$clientes): ?>
-                <tr><td colspan="8" class="vazio"><i class="bi bi-inbox"></i>Nenhum cliente cadastrado ainda.</td></tr>
+                <tr><td colspan="9" class="vazio"><i class="bi bi-inbox"></i>Nenhum cliente cadastrado ainda.</td></tr>
             <?php endif; ?>
             <?php foreach ($clientes as $cliente): ?>
                 <tr>
@@ -40,6 +41,12 @@ include("include/header.php");
                     <td><?php echo e($cliente->getCpf()); ?></td>
                     <td><?php echo e($cliente->getRg()); ?></td>
                     <td><?php echo e($cliente->getDataNascimento('d/m/Y')); ?></td>
+                    <td>
+                        <?php if ($cliente->getCodigoAcesso()): ?>
+                            <code class="codigo-acesso"><?php echo e($cliente->getCodigoAcesso()); ?></code>
+                        <?php endif; ?>
+                        <a href="cliente_codigo.php?id=<?php echo $cliente->getId(); ?>" class="btn btn-sm btn-link p-0 ms-1" title="Gerar outro código" data-confirmar="Gerar um novo código para <?php echo e($cliente->getNome()); ?>? O código atual deixa de funcionar."><i class="bi bi-arrow-repeat"></i></a>
+                    </td>
                     <td class="acoes">
                         <a href="cliente_editar.php?id=<?php echo $cliente->getId(); ?>" class="btn btn-sm btn-outline-primary">Editar</a>
                         <?php if (EmprestimoRepository::countByClientes($cliente->getId()) == 0): ?>

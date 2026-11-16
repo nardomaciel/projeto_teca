@@ -58,6 +58,28 @@ function data_br($data){
     return date('d/m/Y', strtotime($data));
 }
 
+// Gera um código de acesso para o cliente usar na biblioteca online.
+// Sem letras e números que se confundem (O e 0, I e 1).
+function gerar_codigo_acesso(){
+    $letras = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    do {
+        $codigo = '';
+        for ($i = 0; $i < 6; $i++) {
+            $codigo .= $letras[random_int(0, strlen($letras) - 1)];
+        }
+    } while (ClienteRepository::getByCodigo($codigo));
+    return $codigo;
+}
+
+// Cor da lombada: a escolhida no cadastro ou uma da paleta, sempre a mesma para o mesmo livro.
+function cor_lombada($livro_id, $cor = null){
+    if ($cor && preg_match('/^#[0-9a-fA-F]{6}$/', $cor)) {
+        return $cor;
+    }
+    $paleta = ['#7a2e1d', '#1f4e5f', '#2f5d3a', '#8a6d1d', '#4a3b6b', '#6b2737', '#24476b', '#5c4a32', '#3c5a5a', '#8c4a2f'];
+    return $paleta[$livro_id % count($paleta)];
+}
+
 // Dias de atraso de um empréstimo, contando até hoje (ou até a devolução).
 function dias_de_atraso($emprestimo){
     $fim = $emprestimo->getDataDevolucao() ? substr($emprestimo->getDataDevolucao(), 0, 10) : date('Y-m-d');

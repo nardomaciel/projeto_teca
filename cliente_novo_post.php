@@ -17,6 +17,7 @@ $cliente->setTelefone(campo('telefone'));
 $cliente->setEmail(campo('email'));
 $cliente->setCpf(campo('cpf'));
 $cliente->setRg(campo('rg'));
+$cliente->setCodigoAcesso(gerar_codigo_acesso());
 $cliente->setDataNascimento($data_nascimento);
 $cliente->setInclusaoFuncionarioId($user->getId());
 $cliente->setDataInclusao(date('Y-m-d H:i:s'));

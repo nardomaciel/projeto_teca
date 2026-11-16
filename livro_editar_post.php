@@ -22,6 +22,8 @@ $livro->setAno(campo('ano'));
 $livro->setGenero(campo('genero'));
 $livro->setAutorId(campo('autor_id'));
 $livro->setIsbn(campo('isbn'));
+$livro->setSinopse(campo('sinopse'));
+$livro->setCor(preg_match('/^#[0-9a-fA-F]{6}$/', campo('cor')) ? campo('cor') : null);
 $livro->setAlteracaoFuncionarioId($user->getId());
 $livro->setDataAlteracao(date('Y-m-d H:i:s'));
 

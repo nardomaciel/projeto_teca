@@ -14,7 +14,9 @@ class LivroRepository implements Repository{
             $livro->setTitulo($row->titulo);
             $livro->setAno($row->ano);
             $livro->setGenero($row->genero);
-            $livro->setIsbn($row->isbn); 
+            $livro->setIsbn($row->isbn);
+            $livro->setSinopse($row->sinopse);
+            $livro->setCor($row->cor);
             $livro->setAutorId($row->autor_id);
             $livro->setDataInclusao($row->data_inclusao);
             $livro->setDataAlteracao($row->data_alteracao);
@@ -38,7 +40,9 @@ class LivroRepository implements Repository{
             $livro->setTitulo($row->titulo);
             $livro->setAno($row->ano);
             $livro->setGenero($row->genero);
-            $livro->setIsbn($row->isbn); 
+            $livro->setIsbn($row->isbn);
+            $livro->setSinopse($row->sinopse);
+            $livro->setCor($row->cor);
             $livro->setAutorId($row->autor_id);
             $livro->setDataInclusao($row->data_inclusao);
             $livro->setDataAlteracao($row->data_alteracao);
@@ -62,7 +66,9 @@ class LivroRepository implements Repository{
             $livro->setTitulo($row->titulo);
             $livro->setAno($row->ano);
             $livro->setGenero($row->genero);
-            $livro->setIsbn($row->isbn); 
+            $livro->setIsbn($row->isbn);
+            $livro->setSinopse($row->sinopse);
+            $livro->setCor($row->cor);
             $livro->setAutorId($row->autor_id);
             $livro->setDataInclusao($row->data_inclusao);
             $livro->setDataAlteracao($row->data_alteracao);
@@ -75,13 +81,15 @@ class LivroRepository implements Repository{
     }
     public static function insert($obj){
         $db = DB::getInstance();
-        $sql = "INSERT INTO livro (titulo, ano, genero, isbn, autor_id, data_inclusao, inclusao_funcionario_id) VALUES (:titulo, :ano, :genero, :isbn, :autor_id, :data_inclusao, :inclusao_funcionario_id)";
+        $sql = "INSERT INTO livro (titulo, ano, genero, isbn, sinopse, cor, autor_id, data_inclusao, inclusao_funcionario_id) VALUES (:titulo, :ano, :genero, :isbn, :sinopse, :cor, :autor_id, :data_inclusao, :inclusao_funcionario_id)";
 
         $query = $db->prepare($sql);
         $query->bindValue(":titulo",$obj->getTitulo());
         $query->bindValue(":ano",$obj->getAno());
         $query->bindValue(":genero",$obj->getGenero());
         $query->bindValue(":isbn",$obj->getIsbn());
+        $query->bindValue(":sinopse",$obj->getSinopse());
+        $query->bindValue(":cor",$obj->getCor());
         $query->bindValue(":autor_id",$obj->getAutorID());
         $query->bindValue(":data_inclusao",$obj->getDataInclusao());
         $query->bindValue(":inclusao_funcionario_id",$obj->getInclusaoFuncionarioId());
@@ -93,13 +101,15 @@ class LivroRepository implements Repository{
     }
     public static function update($obj){
         $db = DB::getInstance();
-        $sql = "UPDATE livro SET titulo = :titulo, ano = :ano, genero = :genero, isbn = :isbn, autor_id = :autor_id, data_alteracao = :data_alteracao, alteracao_funcionario_id = :alteracao_funcionario_id WHERE id = :id";
+        $sql = "UPDATE livro SET titulo = :titulo, ano = :ano, genero = :genero, isbn = :isbn, sinopse = :sinopse, cor = :cor, autor_id = :autor_id, data_alteracao = :data_alteracao, alteracao_funcionario_id = :alteracao_funcionario_id WHERE id = :id";
         $query = $db->prepare($sql);
         $query->bindValue(":id",$obj->getId());
         $query->bindValue(":titulo",$obj->getTitulo());
         $query->bindValue(":ano",$obj->getAno());
         $query->bindValue(":genero",$obj->getGenero());
         $query->bindValue(":isbn",$obj->getIsbn());
+        $query->bindValue(":sinopse",$obj->getSinopse());
+        $query->bindValue(":cor",$obj->getCor());
         $query->bindValue(":autor_id",$obj->getAutorId());
         $query->bindValue(":data_alteracao",$obj->getDataAlteracao());
         $query->bindValue(":alteracao_funcionario_id",$obj->getAlteracaoFuncionarioId());
@@ -145,6 +155,19 @@ public static function countByAlteracaoFuncionario($alteracao_funcionario_id){
 
     $row = $query->fetch(PDO::FETCH_ASSOC);
     return $row["count(*)"];
+    }
+    // Livros com o nome do autor e a situação, para montar a estante da biblioteca online.
+    public static function listParaEstante(){
+        $db = DB::getInstance();
+        $sql = "SELECT l.id, l.titulo, l.ano, l.genero, l.sinopse, l.cor, a.nome AS autor,
+                       e.data_vencimento AS emprestado_ate
+                FROM livro l
+                JOIN autor a ON a.id = l.autor_id
+                LEFT JOIN emprestimo e ON e.livro_id = l.id AND e.data_devolucao IS NULL
+                ORDER BY l.genero, l.titulo";
+        $query = $db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 }
 ?>

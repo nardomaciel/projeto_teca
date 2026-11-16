@@ -47,6 +47,15 @@ include("include/header.php");
                     <input type="text" name="isbn" id="isbn" class="form-control" value="<?php echo e($livro->getIsbn()); ?>" required maxlength="13">
                 </div>
                 <div class="col-12">
+                    <label for="sinopse" class="form-label">Sinopse</label>
+                    <textarea name="sinopse" id="sinopse" class="form-control" rows="3" maxlength="600"><?php echo e($livro->getSinopse()); ?></textarea>
+                </div>
+                <div class="col-md-4">
+                    <label for="cor" class="form-label">Cor da lombada</label>
+                    <input type="color" name="cor" id="cor" class="form-control form-control-color w-100" value="<?php echo cor_lombada($livro->getId(), $livro->getCor()); ?>">
+                    <div class="form-text">É a cor do livro na estante.</div>
+                </div>
+                <div class="col-12">
                     <input type="hidden" name="id" value="<?php echo $livro->getId(); ?>">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>

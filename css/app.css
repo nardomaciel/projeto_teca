@@ -86,6 +86,22 @@ body {
     scrollbar-width: none;
 }
 
+/* Quadradinho com a cor da lombada na lista de livros */
+.lombada-mini {
+    display: inline-block;
+    width: 6px;
+    height: 1.1em;
+    border-radius: 2px;
+    margin-right: .5rem;
+    vertical-align: -.15em;
+}
+
+.codigo-acesso {
+    font-size: .95em;
+    letter-spacing: .08em;
+    color: var(--bs-emphasis-color);
+}
+
 .form-card {
     max-width: 720px;
 }

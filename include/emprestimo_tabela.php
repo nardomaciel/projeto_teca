@@ -54,7 +54,12 @@ $hoje = date('Y-m-d');
                 <tr>
                     <td><?php echo $emprestimo->getId(); ?></td>
                     <td><?php echo e($livro ? $livro->getTitulo() : ''); ?></td>
-                    <td><?php echo e($cliente ? $cliente->getNome() : ''); ?></td>
+                    <td>
+                        <?php echo e($cliente ? $cliente->getNome() : ''); ?>
+                        <?php if ($emprestimo->getInclusaoFuncionarioId() == null): ?>
+                            <span class="badge rounded-pill text-bg-info ms-1" title="Feito pelo próprio cliente na biblioteca online">online</span>
+                        <?php endif; ?>
+                    </td>
                     <td><?php echo $emprestimo->getDataVencimento('d/m/Y'); ?></td>
                     <td>
                         <?php if ($devolvido): ?>

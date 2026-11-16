@@ -5,6 +5,8 @@ class Livro{
     private $ano;
     private $genero;
     private $isbn;
+    private $sinopse;
+    private $cor;
     private $autor_id;
     private $data_inclusao;
     private $data_alteracao;
@@ -48,6 +50,22 @@ class Livro{
 
     public function setIsbn($isbn){
         $this->isbn = $isbn;
+    }
+
+    public function getSinopse(){
+        return $this->sinopse;
+    }
+
+    public function setSinopse($sinopse){
+        $this->sinopse = $sinopse;
+    }
+
+    public function getCor(){
+        return $this->cor;
+    }
+
+    public function setCor($cor){
+        $this->cor = $cor;
     }
 
     public function getAutorId(){

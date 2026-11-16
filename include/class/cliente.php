@@ -7,6 +7,7 @@ class Cliente
     private $email;
     private $cpf;
     private $rg;
+    private $codigo_acesso;
     private $data_nascimento;
     private $data_inclusao;
     private $data_alteracao;
@@ -48,6 +49,12 @@ class Cliente
     }
     public function setRg($rg){
         $this->rg = $rg;
+    }
+    public function getCodigoAcesso(){
+        return $this->codigo_acesso;
+    }
+    public function setCodigoAcesso($codigo_acesso){
+        $this->codigo_acesso = $codigo_acesso;
     }
     public function getDataNascimento($format = "Y-m-d"){
         $datetime = DateTime::createFromFormat("Y-m-d", $this->data_nascimento);

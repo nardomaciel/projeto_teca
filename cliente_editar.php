@@ -45,6 +45,14 @@ include("include/header.php");
                     <input type="text" name="data_nascimento" id="data_nascimento" class="form-control mask-data" value="<?php echo e($cliente->getDataNascimento('d/m/Y')); ?>" required>
                 </div>
                 <div class="col-12">
+                    <div class="alert alert-secondary d-flex flex-wrap align-items-center gap-2 mb-0 py-2">
+                        <i class="bi bi-key"></i>
+                        Código de acesso à biblioteca online:
+                        <code class="codigo-acesso"><?php echo e($cliente->getCodigoAcesso() ?: 'sem código'); ?></code>
+                        <a href="cliente_codigo.php?id=<?php echo $cliente->getId(); ?>" class="ms-auto small" data-confirmar="Gerar um novo código? O atual deixa de funcionar.">Gerar outro</a>
+                    </div>
+                </div>
+                <div class="col-12">
                     <input type="hidden" name="id" value="<?php echo $cliente->getId(); ?>">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
